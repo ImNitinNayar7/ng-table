@@ -10,3 +10,4 @@ test/*.js
 !test/index.js
 # redundant webpack build artifacts produced by ExtractTextPlugin
 dist/styles.*
+build

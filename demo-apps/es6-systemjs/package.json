@@ -11,9 +11,8 @@
     "linklocal": "npm run _linklocal -- --named ng-table ../../../",
     "server": "node ../../node_modules/http-server/bin/http-server -c-1 -o",
     "setup:local": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel build:lib linklocal",
-    "start": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel watch:lib server",
-    "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm install --production",
-    "watch:lib": "cd ../../ && npm run watch:debug"
+    "start": "npm run server",
+    "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm install --production"
   },
   "keywords": [],
   "dependencies": {

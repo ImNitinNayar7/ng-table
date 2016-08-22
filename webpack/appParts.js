@@ -12,12 +12,14 @@ function createAppParts(rootDir, env = {}) {
     let PATHS = {
         build: path.join(rootDir, 'build'),
         source: path.join(rootDir, 'src')
-    };
+    };    
 
     return Object.assign({}, commonParts, {
         asAppBundle,
-        extractSassChunks,
         inlineImages,
+        inlineHtmlTemplates,
+        inlineNgTableHtmlTemplates,
+        sass,
         useHtmlPlugin
     });
 
@@ -39,10 +41,7 @@ function createAppParts(rootDir, env = {}) {
                     chunkFilename: '[chunkhash].js'
                 },
                 plugins: [
-                    // include node_modules requested in a seperate bundle. This will include:
-                    // - all node_modules request by our app
-                    // - "external" node_modules requested by our libraries - those node_modules
-                    //   that are not otherwise bundled into that library
+                    // include node_modules requested in a seperate bundle
                     new webpack.optimize.CommonsChunkPlugin({
                         name: 'vendor',
                         minChunks: module => isNodeModule.test(module.resource)
@@ -66,7 +65,7 @@ function createAppParts(rootDir, env = {}) {
                         // ensure urls in css work in conjunction with source maps
                         // this is required because of the limitation of style-loader
                         // (see https://github.com/webpack/style-loader#recommended-configuration)
-                        publicPath: 'http://localhost:8080/'
+                        publicPath: 'http://localhost:8080'
                     }
                 }//,
                 // hot module reload not working; wanted it for the css :-(
@@ -110,73 +109,73 @@ function createAppParts(rootDir, env = {}) {
         }
     }
 
-    function extractSassChunks(entries) {
-
-        // todo: exclude redundant JS file created for each css chunk from the index.html file emitted by HtmlWebpackPlugin
-
-        const extractedPaths = Object.keys(entries).reduce((acc, entryName) => {
-            const files = entries[entryName];
-            return acc.concat(Array.isArray(files) ? files : [files]);
-        }, []);
-
-        const chunks = Object.keys(entries).reduce((acc, entryName) => {
-            const chunk = _extractSassChunk(entryName, entries[entryName]);
-            return acc.concat([chunk]);
-        }, []);
-
-        return merge(
-            ...chunks,
-            commonParts.sass(extractedPaths)
-        );
-    }
-
-    function _extractSassChunk(entryName, files) {
-        const extractor = new ExtractTextPlugin('[name].[chunkhash].css');
-        let loader;
-        if (env.debug || env.prod) {
-            // note: we CAN use source maps for *extracted* css files in a deployed website without 
-            // suffering from the problem of image urls not resolving to the correct path
-            loader = 'css?sourceMap!resolve-url!sass?sourceMap';
-        } else {
-            loader = 'css!resolve-url!sass?sourceMap';
-        }
-        return {
-            entry: {
-                [entryName]: files
-            },
-            module: {
-                loaders: [
-                    {
-                        test: /\.scss$/,
-                        loader: extractor.extract({
-                            fallbackLoader: 'style',
-                            loader: loader
-                        }),
-                        include: files
-                    }
-                ]
-            },
-            plugins: [
-                extractor,
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: entryName,
-                    chunks: ['main', entryName]
-                })
-            ]
-        };
-    }
-
     function inlineImages(sizeLimit = 1024) {
         return {
             module: {
                 loaders: [
-                    { 
-                        test: /\.(jpg|png)$/, 
-                        loader: `url?limit=${sizeLimit}&name=[path][name]-[hash].[ext]`, 
-                        exclude: /node_modules/ 
+                    {
+                        test: /\.(jpg|png)$/,
+                        loader: `url?limit=${sizeLimit}&name=[path][name]-[hash].[ext]`,
+                        exclude: /node_modules/
                     }
                 ]
             }
         }
+    }
+
+    function inlineHtmlTemplates() {
+        return {
+            module: {
+                loaders: [
+                    {
+                        test: /\.html$/,
+                        loaders: ['ngtemplate?requireAngular&relativeTo=/src/&prefix=demo-app/', 'html'],
+                        include: [
+                            path.resolve(rootDir, 'src')
+                        ],
+                        exclude: [path.join(rootDir, 'index.tpl.html')]
+                    }
+                ]
+            }
+        };
+    }
+
+    function inlineNgTableHtmlTemplates() {
+        return {
+            module: {
+                loaders: [
+                    {
+                        test: /ng-table[\/\\]src[\/\\].*\.html$/,
+                        loaders: ['ngtemplate?requireAngular&relativeTo=/src/browser/&prefix=ng-table/', 'html']
+                    }
+                ]
+            }
+        };
+    }
+
+    function sass() {
+        const isDevServer = process.argv.find(v => v.indexOf('webpack-dev-server') !== -1);
+
+        // note: would like to use sourcemaps in a deployed website (ie outside of dev-server)
+        // but these do not work with relative paths (see the asAppBundle ouput options 
+        // in this file for more details)
+        let loaders;
+        if ((env.debug || env.prod) && isDevServer) {
+            loaders = 'style!css?sourceMap!resolve-url!sass?sourceMap';
+        } else {
+            // note: the 
+            loaders = 'style!css!resolve-url!sass?sourceMap';
+        }
+        return {
+            module: {
+                loaders: [
+                    {
+                        test: /\.scss$/,
+                        loaders: loaders,
+                        exclude: /node_modules/
+                    }
+                ]
+            }
+        };
     }
 }

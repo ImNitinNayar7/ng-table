@@ -6,18 +6,25 @@ module.exports = createParts;
 
 function createParts(rootDir, env) {
 
-    const isDevServer = process.argv.find(v => v.indexOf('webpack-dev-server') !== -1);
-
     return {
-        isDevServer,
+        es6,
         forEnvironment,
         prodOptimize,
-        sass,
         testCoverage,
         typescript
     };
 
     ////////
+
+    function es6() {
+        return {
+            module: {
+                loaders: [
+                    { test: /\.js$/, loaders: ['babel?cacheDirectory'], exclude: /node_modules/ }
+                ]
+            }
+        }
+    }
 
     function prodOptimize() {
         return {
@@ -43,31 +50,6 @@ function createParts(rootDir, env) {
                     sourceMap: true
                 })
             ]
-        };
-    }
-
-    function sass(excludeFiles) {
-        excludeFiles = excludeFiles || [];
-        // note: would like to use sourcemaps in a deployed website (ie outside of dev-server)
-        // but these do not work with relative paths (see the configuration of ouput options 
-        // in this file for more details)
-        let loaders;
-        if ((env.debug || env.prod) && isDevServer) {
-            loaders = 'style!css?sourceMap!resolve-url!sass?sourceMap';
-        } else {
-            // note: the 
-            loaders = 'style!css!resolve-url!sass?sourceMap';
-        }
-        return {
-            module: {
-                loaders: [
-                    {
-                        test: /\.scss$/,
-                        loaders: loaders,
-                        exclude: [/node_modules/, ...excludeFiles]
-                    }
-                ]
-            }
         };
     }
 

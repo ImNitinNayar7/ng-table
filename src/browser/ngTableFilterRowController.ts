@@ -9,7 +9,7 @@
 import * as ng1 from 'angular';
 import { IFilterConfig, IFilterTemplateDef, IFilterTemplateDefMap } from './public-interfaces';
 
-interface IScopeExtensions {
+export interface IScopeExtensions {
     config: IFilterConfig;
     getFilterCellCss(filter: IFilterTemplateDefMap, layout: string): string;
     getFilterPlaceholderValue(filterDef: string | IFilterTemplateDef, filterKey?: string): string;

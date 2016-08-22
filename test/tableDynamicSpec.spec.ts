@@ -1,4 +1,4 @@
-import ngTableModule from '../index';
+import { ngTable } from '../index';
 import { INgTableParams, ITableParamsConstructor } from '../src/core';
 import { ColumnFieldContext, DynamicTableColField, IDynamicTableColDef, IFilterTemplateDefMap, ISelectOption } from '../src/browser';
 
@@ -42,7 +42,7 @@ describe('ng-table-dynamic', () => {
         { id: 17, name: "Enos", age: 34, money: -100 }
     ];
 
-    beforeAll(() => expect(ngTableModule).toBeDefined());
+    beforeAll(() => expect(ngTable).toBeDefined());
     beforeEach(angular.mock.module('ngTable'));
 
     var scope: ICustomizedScope;

@@ -1,5 +1,7 @@
 import 'ng-table';
 
+const templateUrl = require('./my-table.component.html');
+
 class MyTableController {
     constructor(NgTableParams) {
         var data = [
@@ -31,7 +33,7 @@ class MyTableController {
 MyTableController.$inject = ['NgTableParams'];
 
 const myTableComponent = {
-    templateUrl: 'src/my-table/my-table.component.html',
+    templateUrl: templateUrl,
     controller: MyTableController
 };
 
