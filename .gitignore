@@ -6,6 +6,8 @@ out
 typings
 npm-debug.*
 index.js
+!demo-apps/es5/index.js
+!demo-apps/es6-systemjs/index.js
 test/*.js
 !test/index.js
 # redundant webpack build artifacts produced by ExtractTextPlugin
