@@ -12,7 +12,9 @@ function createAppParts(rootDir, env = {}) {
     let PATHS = {
         build: path.join(rootDir, 'build'),
         source: path.join(rootDir, 'src')
-    };    
+    };
+
+    const isDevServer = process.argv.find(v => v.indexOf('webpack-dev-server') !== -1);
 
     return Object.assign({}, commonParts, {
         asAppBundle,
@@ -57,7 +59,7 @@ function createAppParts(rootDir, env = {}) {
             devServer()
         );
 
-        if (commonParts.isDevServer) {
+        if (isDevServer) {
             return merge(
                 common,
                 {
@@ -65,7 +67,7 @@ function createAppParts(rootDir, env = {}) {
                         // ensure urls in css work in conjunction with source maps
                         // this is required because of the limitation of style-loader
                         // (see https://github.com/webpack/style-loader#recommended-configuration)
-                        publicPath: 'http://localhost:8080'
+                        publicPath: 'http://localhost:8080/'
                     }
                 }//,
                 // hot module reload not working; wanted it for the css :-(
@@ -114,9 +116,8 @@ function createAppParts(rootDir, env = {}) {
             module: {
                 loaders: [
                     {
-                        test: /\.(jpg|png)$/,
-                        loader: `url?limit=${sizeLimit}&name=[path][name]-[hash].[ext]`,
-                        exclude: /node_modules/
+                        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+                        loader: `url?limit=${sizeLimit}&name=[path][name]-[hash].[ext]`
                     }
                 ]
             }
@@ -154,8 +155,6 @@ function createAppParts(rootDir, env = {}) {
     }
 
     function sass() {
-        const isDevServer = process.argv.find(v => v.indexOf('webpack-dev-server') !== -1);
-
         // note: would like to use sourcemaps in a deployed website (ie outside of dev-server)
         // but these do not work with relative paths (see the asAppBundle ouput options 
         // in this file for more details)

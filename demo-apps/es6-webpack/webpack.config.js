@@ -7,6 +7,11 @@ module.exports = (env = { prod: false, debug: false, port: 8080, host: 'localhos
 
     return merge(
         parts.asAppBundle(),
+        {
+            entry: {
+                'vendor-styles': path.join(__dirname, 'src', 'shared', 'vendor-styles.js')
+            }
+        },
         parts.es6(),
         parts.sass(),
         parts.inlineImages(),
