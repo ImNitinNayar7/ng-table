@@ -108,7 +108,8 @@ function createAppParts(rootDir, env = {}) {
         var HtmlWebpackPlugin = require('html-webpack-plugin');
         return {
             plugins: [new HtmlWebpackPlugin({
-                template: path.join(rootDir, 'index.tpl.html')
+                template: path.join(rootDir, 'index.tpl.html'),
+                inject: false // our template will handle injecting references to js / css
             })]
         }
     }
@@ -157,8 +158,6 @@ function createAppParts(rootDir, env = {}) {
     }
 
     function extractSassChunks(entries) {
-
-        // todo: exclude redundant JS file created for each css chunk from the index.html file emitted by HtmlWebpackPlugin
 
         const extractedPaths = Object.keys(entries).reduce((acc, entryName) => {
             const files = entries[entryName];

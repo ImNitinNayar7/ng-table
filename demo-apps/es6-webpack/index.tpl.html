@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width">
     <!-- todo: bundle this -->
     <title>Sample app (ES2015+Webpack) | ng-table</title>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% } %>
 </head>
 
 <body class="site-background" ng-app="demo-app">
@@ -14,6 +17,10 @@
     <h1>ng-table sample app (ES2015+Webpack)</h1>
 
     <my-table></my-table>
+
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { if (htmlWebpackPlugin.files.chunks[chunk].css.length === 0) {%>
+    <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% }} %>
 </body>
 
 </html>

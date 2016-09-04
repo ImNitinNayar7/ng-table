@@ -18,6 +18,7 @@ module.exports = (env = { prod: false, debug: false, port: 8080, host: 'localhos
         parts.inlineImages(),
         parts.inlineHtmlTemplates(),
         parts.inlineNgTableHtmlTemplates(),
+        // critical: useHtmlPlugin must be called *after* extractSassChunks
         parts.useHtmlPlugin(),
         parts.forEnvironment()
     );
