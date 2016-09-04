@@ -16,7 +16,7 @@
     "linklocal": "npm run _linklocal -- --named ng-table ../../../",
     "setup:local": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel build:lib linklocal",
     "server": "node ../../node_modules/http-server/bin/http-server build -c-1 -o",
-    "start": "node ../../node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node ../../node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.debug",
     "stats": "node ../../node_modules/webpack/bin/webpack.js --env.prod --profile --json > build-stats.json",
     "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm install --production"
   },

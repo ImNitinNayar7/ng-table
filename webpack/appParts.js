@@ -18,9 +18,11 @@ function createAppParts(rootDir, env = {}) {
 
     return Object.assign({}, commonParts, {
         asAppBundle,
+        extractSassChunks,
         inlineImages,
         inlineHtmlTemplates,
         inlineNgTableHtmlTemplates,
+        isDevServer,
         sass,
         useHtmlPlugin
     });
@@ -154,9 +156,62 @@ function createAppParts(rootDir, env = {}) {
         };
     }
 
-    function sass() {
+    function extractSassChunks(entries) {
+
+        // todo: exclude redundant JS file created for each css chunk from the index.html file emitted by HtmlWebpackPlugin
+
+        const extractedPaths = Object.keys(entries).reduce((acc, entryName) => {
+            const files = entries[entryName];
+            return acc.concat(Array.isArray(files) ? files : [files]);
+        }, []);
+
+        const chunks = Object.keys(entries).reduce((acc, entryName) => {
+            const chunk = _extractSassChunk(entryName, entries[entryName]);
+            return acc.concat([chunk]);
+        }, []);
+
+        return merge(
+            ...chunks,
+            sass(extractedPaths)
+        );
+    }
+
+    function _extractSassChunk(entryName, files) {
+        const extractor = new ExtractTextPlugin('[name].[chunkhash].css');
+        let loader;
+        if (env.debug || env.prod) {
+            // note: we CAN use source maps for *extracted* css files in a deployed website without 
+            // suffering from the problem of image urls not resolving to the correct path
+            loader = 'css?sourceMap!resolve-url!sass?sourceMap';
+        } else {
+            loader = 'css!resolve-url!sass?sourceMap';
+        }
+        return {
+            entry: {
+                [entryName]: files
+            },
+            module: {
+                loaders: [
+                    {
+                        test: /\.scss$/,
+                        loader: extractor.extract({
+                            fallbackLoader: 'style',
+                            loader: loader
+                        }),
+                        include: files
+                    }
+                ]
+            },
+            plugins: [
+                extractor
+            ]
+        };
+    }
+
+    function sass(excludeFiles) {
+        excludeFiles = excludeFiles || [];
         // note: would like to use sourcemaps in a deployed website (ie outside of dev-server)
-        // but these do not work with relative paths (see the asAppBundle ouput options 
+        // but these do not work with relative paths (see the configuration of ouput options 
         // in this file for more details)
         let loaders;
         if ((env.debug || env.prod) && isDevServer) {
@@ -171,7 +226,7 @@ function createAppParts(rootDir, env = {}) {
                     {
                         test: /\.scss$/,
                         loaders: loaders,
-                        exclude: /node_modules/
+                        exclude: [...excludeFiles]
                     }
                 ]
             }
