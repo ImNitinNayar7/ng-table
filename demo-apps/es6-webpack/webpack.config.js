@@ -13,12 +13,12 @@ module.exports = (env = { prod: false, debug: false, port: 8080, host: 'localhos
 
     return merge(
         parts.asAppBundle(),
-        parts.isDevServer ? merge(vendorStyles, parts.sass()) : parts.extractSassChunks(vendorStyles.entry),
+        vendorStyles,
+        parts.isDevServer ? parts.sass() : parts.extractSassChunks(vendorStyles.entry),
         parts.es6(),
         parts.inlineImages(),
         parts.inlineHtmlTemplates(),
         parts.inlineNgTableHtmlTemplates(),
-        // critical: useHtmlPlugin must be called *after* extractSassChunks
         parts.useHtmlPlugin(),
         parts.forEnvironment()
     );

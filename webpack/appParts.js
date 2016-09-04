@@ -157,25 +157,20 @@ function createAppParts(rootDir, env = {}) {
         };
     }
 
-    function extractSassChunks(entries) {
+    function extractSassChunks(entry) {
 
-        const extractedPaths = Object.keys(entries).reduce((acc, entryName) => {
-            const files = entries[entryName];
+        const extractedPaths = Object.keys(entry).reduce((acc, chunkName) => {
+            const files = entry[chunkName];
             return acc.concat(Array.isArray(files) ? files : [files]);
         }, []);
 
-        const chunks = Object.keys(entries).reduce((acc, entryName) => {
-            const chunk = _extractSassChunk(entryName, entries[entryName]);
-            return acc.concat([chunk]);
-        }, []);
-
         return merge(
-            ...chunks,
+            _extractSass(extractedPaths),
             sass(extractedPaths)
         );
     }
 
-    function _extractSassChunk(entryName, files) {
+    function _extractSass(files) {
         const extractor = new ExtractTextPlugin('[name].[chunkhash].css');
         let loader;
         if (env.debug || env.prod) {
@@ -186,9 +181,6 @@ function createAppParts(rootDir, env = {}) {
             loader = 'css!resolve-url!sass?sourceMap';
         }
         return {
-            entry: {
-                [entryName]: files
-            },
             module: {
                 loaders: [
                     {
