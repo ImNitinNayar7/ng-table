@@ -23,8 +23,7 @@
   "keywords": [],
   "dependencies": {
     "angular": "1.5.8",
-    "bootstrap": "^3.3.7",
-    "bootstrap-sass": "^3.3.7",
+    "bootstrap-css-only": "^3.3.6",
     "ng-table": "^1.0.0"
   },
   "devDependencies": {
