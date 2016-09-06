@@ -7,11 +7,10 @@
 
 ## Running sample App
 
-1. cd demo-apps/es5
+1. cd demo-apps/es6-systemjs
 2. `npm install`
 3. `npm run setup:local`
     * runs the ng-table build to create the library distibutable code (including `ng-table.js`)
     * in this app's node_modules, creates a symlink reference to your local ng-table on disk
 4. `npm start`
-    * runs the ng-table build in watch mode
-    * opens this app's index.html
+    * runs http-server to serve this app's index.html

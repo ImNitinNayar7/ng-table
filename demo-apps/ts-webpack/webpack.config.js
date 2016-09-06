@@ -1,0 +1,25 @@
+const path = require('path');
+const merge = require('webpack-merge');
+
+module.exports = (env = { prod: false, debug: false, port: 8080, host: 'localhost' }) => {
+
+    const parts = require('../../webpack/appParts')(__dirname, env);
+
+    const vendorStyles = {
+        entry: {
+            'vendor-styles': path.join(__dirname, 'src', 'shared', 'vendor-styles.scss')
+        }
+    };
+
+    return merge(
+        parts.asAppBundle(),
+        vendorStyles,
+        parts.isDevServer ? parts.sass() : parts.extractSassChunks(vendorStyles.entry),
+        parts.typescript(),
+        parts.inlineImages(),
+        parts.inlineHtmlTemplates(),
+        parts.inlineNgTableHtmlTemplates(),
+        parts.useHtmlPlugin(),
+        parts.forEnvironment()
+    );
+}

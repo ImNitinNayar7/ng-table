@@ -18,6 +18,7 @@
     "./*",
     "typings/index.d.ts"
   ],
+  "exclude": ["node_modules"],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
     "useWebpackText": true //Allows loaders to be chained to awesome-typescript-loader.
