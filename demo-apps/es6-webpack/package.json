@@ -18,7 +18,8 @@
     "server": "node ../../node_modules/http-server/bin/http-server build -c-1 -o",
     "start": "node ../../node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.debug",
     "stats": "node ../../node_modules/webpack/bin/webpack.js --env.prod --profile --json > build-stats.json",
-    "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm install --production"
+    "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm install --production",
+    "validate": "node ../../node_modules/webpack-validator/dist/bin/webpack-validator.js webpack.config.js"
   },
   "keywords": [],
   "dependencies": {

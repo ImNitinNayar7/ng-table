@@ -25,6 +25,8 @@ module.exports = (env = { prod: false, debug: false, port: 8080, host: 'localhos
         parts.inlineHtmlTemplates(),
         parts.inlineNgTableHtmlTemplates(),
         parts.useHtmlPlugin(),
-        parts.forEnvironment()
+        parts.forEnvironment(),
+        // this is only required because we using symlinks
+        parts.resolveLibraryPeerDependencies()
     );
 }

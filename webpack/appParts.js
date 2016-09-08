@@ -23,6 +23,7 @@ function createAppParts(rootDir, env = {}) {
         inlineHtmlTemplates,
         inlineNgTableHtmlTemplates,
         isDevServer,
+        resolveLibraryPeerDependencies,
         sass,
         useHtmlPlugin
     });
@@ -196,6 +197,23 @@ function createAppParts(rootDir, env = {}) {
         };
     }
 
+    
+    /**
+     * override the webpack resolution logic but only for peer dependencies defined by ng-table.
+     * This is necessary because the standard resolve breaks down when using symlinks
+     */
+    function resolveLibraryPeerDependencies() {
+        const ngTablePkgPath = path.join(rootDir, 'node_modules', 'ng-table', 'package');
+        const ngTablePkg = require(ngTablePkgPath);
+        const alias = Object.keys(ngTablePkg.peerDependencies).reduce((acc, name) => {
+            acc[name] = path.join(rootDir, 'node_modules', name);
+            return acc;
+        }, {});
+        return {
+            resolve: { alias }
+        };
+    }
+
     function sass(excludeFiles) {
         excludeFiles = excludeFiles || [];
         // note: would like to use sourcemaps in a deployed website (ie outside of dev-server)
@@ -213,7 +231,7 @@ function createAppParts(rootDir, env = {}) {
                 loaders: [
                     {
                         test: /\.scss$/,
-                        loaders: loaders,
+                        loader: loaders,
                         exclude: [...excludeFiles]
                     }
                 ]
