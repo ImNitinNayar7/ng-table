@@ -6,6 +6,14 @@ out
 typings
 npm-debug.*
 index.js
+index.d.ts
+src/**/*.js
+src/**/*.js.map
+src/**/*.d.ts
+test/**/*.d.ts
+demo-apps/ts-webpack/src/**/*.js
+demo-apps/ts-webpack/src/**/*.js.map
+demo-apps/ts-webpack/src/**/*.d.ts
 !demo-apps/es5/index.js
 !demo-apps/es6-systemjs/index.js
 test/*.js

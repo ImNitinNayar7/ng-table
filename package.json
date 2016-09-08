@@ -51,7 +51,7 @@
     "build": "webpack --env.debug",
     "build:prod": "webpack --env.prod",
     "build:full": "webpack --env.prod --env.debug",
-    "clean": "shx rm -f index.d.ts src/browser/*.js src/browser/*.js.map src/browser/*.d.ts src/core/*.js src/core/*.js.map src/core/*.d.ts test/*.spec.js test/*.spec.js.map test/*.spec.d.ts",
+    "clean": "shx rm -f index.d.ts src/browser/*.js src/browser/*.js.map src/browser/*.d.ts src/core/*.js src/core/*.js.map src/core/*.d.ts test/*.spec.js test/*.spec.js.map test/*.spec.d.ts demo-apps/ts-webpack/src/**/*.js demo-apps/ts-webpack/src/**/*.js.map",
     "setup": "bower prune && bower install && npm run typings",
     "test": "karma start --single-run --no-auto-watch",
     "test:debug": "karma start --no-single-run --no-auto-watch",

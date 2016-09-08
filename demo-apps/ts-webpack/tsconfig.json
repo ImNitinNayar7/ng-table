@@ -12,10 +12,6 @@
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true
   },
-  "include": [
-    "src/**/*",
-    "typings/index.d.ts"
-  ],
   "exclude": ["node_modules"],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,

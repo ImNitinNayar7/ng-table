@@ -35,9 +35,6 @@ function createAppParts(rootDir, env = {}) {
 
         const common = merge(
             {
-                entry: {
-                    main: path.join(PATHS.source, 'main.js')
-                },
                 output: {
                     path: PATHS.build,
                     filename: '[name].[chunkhash].js',

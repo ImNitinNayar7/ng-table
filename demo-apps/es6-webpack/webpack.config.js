@@ -12,6 +12,11 @@ module.exports = (env = { prod: false, debug: false, port: 8080, host: 'localhos
     };
 
     return merge(
+        {
+            entry: {
+                main: path.join(__dirname, 'src', 'main.js')
+            }
+        },
         parts.asAppBundle(),
         vendorStyles,
         parts.isDevServer ? parts.sass() : parts.extractSassChunks(vendorStyles.entry),
