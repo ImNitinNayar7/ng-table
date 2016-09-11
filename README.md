@@ -54,7 +54,7 @@ and [@types/ng-table](https://www.npmjs.com/package/@types/ng-table) are depreci
 We use Karma to ensure the quality of the code. The easiest way to run these checks is to use `npm test`:
 
 ```sh
-npm install && npm run setup
+npm install
 npm run build
 npm test
 ```

@@ -1,3 +1,5 @@
+import { IAugmentedJQuery, ICompileService, IQService, IPromise, IScope, ITimeoutService } from 'angular';
+import * as ng1 from 'angular';
 import { ngTable } from '../index';
 import { INgTableParams, IParamValues, ISettings, ISortingValues, ITableParamsConstructor } from '../src/core';
 import { IColumnDef, IFilterTemplateDef, IFilterTemplateDefMap, ISelectOption } from '../src/browser'
@@ -10,12 +12,12 @@ describe('ng-table', () => {
         money?: number;
     }
 
-    interface INgTableChildScope extends ng.IScope {
+    interface INgTableChildScope extends IScope {
         params: INgTableParams<any>;
         $columns: IColumnDef[];
     }
 
-    interface ICustomizedScope extends ng.IScope {
+    interface ICustomizedScope extends IScope {
         $$childHead: INgTableChildScope;
         ageFilter: IFilterTemplateDefMap;
         ageExpandedFilter: { [name: string]: IFilterTemplateDef };
@@ -25,7 +27,7 @@ describe('ng-table', () => {
         getFilter($column: IColumnDef): IFilterTemplateDefMap;
         isAgeVisible: boolean;
         nameTitle(): string;
-        money: () => ng.IPromise<ISelectOption[]>;
+        money: () => IPromise<ISelectOption[]>;
         moneyTitle(): string;
         showAge: boolean;
         showFilterRow: boolean;
@@ -58,10 +60,10 @@ describe('ng-table', () => {
     var NgTableParams: ITableParamsConstructor<any>;
 
     beforeAll(() => expect(ngTable).toBeDefined());
-    beforeEach(angular.mock.module('ngTable'));
+    beforeEach(ng1.mock.module('ngTable'));
 
     var scope: ICustomizedScope;
-    beforeEach(inject(($rootScope: ng.IScope, _NgTableParams_: ITableParamsConstructor<any>) => {
+    beforeEach(inject(($rootScope: IScope, _NgTableParams_: ITableParamsConstructor<any>) => {
         scope = $rootScope.$new(true) as ICustomizedScope;
         NgTableParams = _NgTableParams_;
     }));
@@ -75,8 +77,8 @@ describe('ng-table', () => {
             settings = arguments[1];
         }
 
-        settings = angular.extend({}, settings);
-        settings.filterOptions = angular.extend({}, {
+        settings = ng1.extend({}, settings);
+        settings.filterOptions = ng1.extend({}, {
             filterDelay: 0
         }, settings.filterOptions);
         var tableParams = new NgTableParams(initialParams, settings);
@@ -85,9 +87,9 @@ describe('ng-table', () => {
     }
 
     describe('basics', () => {
-        var elm: ng.IAugmentedJQuery;
-        beforeEach(inject(($compile: ng.ICompileService, $q: ng.IQService) => {
-            elm = angular.element(
+        var elm: IAugmentedJQuery;
+        beforeEach(inject(($compile: ICompileService, $q: IQService) => {
+            elm = ng1.element(
                 '<div>' +
                 '<table ng-table="tableParams">' +
                 '<tr ng-repeat="user in $data">' +
@@ -145,60 +147,60 @@ describe('ng-table', () => {
             var rows = thead.find('tr');
             expect(rows.length).toBe(2);
 
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
 
             expect(titles.length).toBe(3);
-            expect(angular.element(titles[0]).text().trim()).toBe('Name of person');
-            expect(angular.element(titles[1]).text().trim()).toBe('Age');
-            expect(angular.element(titles[2]).text().trim()).toBe('Money');
+            expect(ng1.element(titles[0]).text().trim()).toBe('Name of person');
+            expect(ng1.element(titles[1]).text().trim()).toBe('Age');
+            expect(ng1.element(titles[2]).text().trim()).toBe('Money');
 
-            expect(angular.element(rows[1]).hasClass('ng-table-filters')).toBeTruthy();
-            var filters = angular.element(rows[1]).find('th');
+            expect(ng1.element(rows[1]).hasClass('ng-table-filters')).toBeTruthy();
+            var filters = ng1.element(rows[1]).find('th');
             expect(filters.length).toBe(3);
-            expect(angular.element(filters[0]).hasClass('filter')).toBeTruthy();
-            expect(angular.element(filters[1]).hasClass('filter')).toBeTruthy();
-            expect(angular.element(filters[2]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[0]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[1]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[2]).hasClass('filter')).toBeTruthy();
         });
 
         it('should create table header classes', () => {
 
             var thead = elm.find('thead');
             var rows = thead.find('tr');
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
 
-            expect(angular.element(titles[0]).hasClass('header')).toBe(true);
-            expect(angular.element(titles[1]).hasClass('header')).toBe(true);
-            expect(angular.element(titles[2]).hasClass('header')).toBe(true);
+            expect(ng1.element(titles[0]).hasClass('header')).toBe(true);
+            expect(ng1.element(titles[1]).hasClass('header')).toBe(true);
+            expect(ng1.element(titles[2]).hasClass('header')).toBe(true);
 
-            expect(angular.element(titles[0]).hasClass('sortable')).toBe(true);
-            expect(angular.element(titles[1]).hasClass('sortable')).toBe(true);
-            expect(angular.element(titles[2]).hasClass('sortable')).toBe(false);
+            expect(ng1.element(titles[0]).hasClass('sortable')).toBe(true);
+            expect(ng1.element(titles[1]).hasClass('sortable')).toBe(true);
+            expect(ng1.element(titles[2]).hasClass('sortable')).toBe(false);
 
-            expect(angular.element(titles[0]).hasClass('customClass')).toBe(true);
-            expect(angular.element(titles[1]).hasClass('customClass')).toBe(true);
-            expect(angular.element(titles[2]).hasClass('moneyHeaderClass')).toBe(true);
+            expect(ng1.element(titles[0]).hasClass('customClass')).toBe(true);
+            expect(ng1.element(titles[1]).hasClass('customClass')).toBe(true);
+            expect(ng1.element(titles[2]).hasClass('moneyHeaderClass')).toBe(true);
 
 
-            var filterCells = angular.element(rows[1]).find('th');
+            var filterCells = ng1.element(rows[1]).find('th');
 
-            expect(angular.element(filterCells[0]).hasClass('filter')).toBe(true);
-            expect(angular.element(filterCells[1]).hasClass('filter')).toBe(true);
-            expect(angular.element(filterCells[2]).hasClass('filter')).toBe(true);
+            expect(ng1.element(filterCells[0]).hasClass('filter')).toBe(true);
+            expect(ng1.element(filterCells[1]).hasClass('filter')).toBe(true);
+            expect(ng1.element(filterCells[2]).hasClass('filter')).toBe(true);
 
-            expect(angular.element(filterCells[0]).hasClass('customClass')).toBe(true);
-            expect(angular.element(filterCells[1]).hasClass('customClass')).toBe(true);
-            expect(angular.element(filterCells[2]).hasClass('moneyHeaderClass')).toBe(true);
+            expect(ng1.element(filterCells[0]).hasClass('customClass')).toBe(true);
+            expect(ng1.element(filterCells[1]).hasClass('customClass')).toBe(true);
+            expect(ng1.element(filterCells[2]).hasClass('moneyHeaderClass')).toBe(true);
         });
 
         it('should create table header titles', () => {
 
             var thead = elm.find('thead');
             var rows = thead.find('tr');
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
 
-            expect(angular.element(titles[0]).attr('title').trim()).toBe('Sort by Name');
-            expect(angular.element(titles[1]).attr('title').trim()).toBe('Sort by Age');
-            expect(angular.element(titles[2]).attr('title').trim()).toBe('Sort by Money');
+            expect(ng1.element(titles[0]).attr('title').trim()).toBe('Sort by Name');
+            expect(ng1.element(titles[1]).attr('title').trim()).toBe('Sort by Age');
+            expect(ng1.element(titles[2]).attr('title').trim()).toBe('Sort by Money');
         });
 
 
@@ -243,17 +245,17 @@ describe('ng-table', () => {
             scope.tableParams = params;
             scope.$digest();
 
-            var filterRow = angular.element(elm.find('thead').find('tr')[1]);
+            var filterRow = ng1.element(elm.find('thead').find('tr')[1]);
             var filterCells = filterRow.find('th');
-            expect(angular.element(filterCells[0]).attr('data-title-text').trim()).toBe('Name of person');
-            expect(angular.element(filterCells[1]).attr('data-title-text').trim()).toBe('Age');
-            expect(angular.element(filterCells[2]).attr('data-title-text').trim()).toBe('Money');
+            expect(ng1.element(filterCells[0]).attr('data-title-text').trim()).toBe('Name of person');
+            expect(ng1.element(filterCells[1]).attr('data-title-text').trim()).toBe('Age');
+            expect(ng1.element(filterCells[2]).attr('data-title-text').trim()).toBe('Money');
 
             var dataRows = elm.find('tbody').find('tr');
-            var dataCells = angular.element(dataRows[0]).find('td');
-            expect(angular.element(dataCells[0]).attr('data-title-text').trim()).toBe('Name of person');
-            expect(angular.element(dataCells[1]).attr('data-title-text').trim()).toBe('Age');
-            expect(angular.element(dataCells[2]).attr('data-title-text').trim()).toBe('Money');
+            var dataCells = ng1.element(dataRows[0]).find('td');
+            expect(ng1.element(dataCells[0]).attr('data-title-text').trim()).toBe('Name of person');
+            expect(ng1.element(dataCells[1]).attr('data-title-text').trim()).toBe('Age');
+            expect(ng1.element(dataCells[2]).attr('data-title-text').trim()).toBe('Money');
         });
 
 
@@ -265,13 +267,13 @@ describe('ng-table', () => {
             });
             scope.$digest();
 
-            var headerRow = angular.element(elm.find('thead').find('tr')[0]);
+            var headerRow = ng1.element(elm.find('thead').find('tr')[0]);
             expect(headerRow.find('th').length).toBe(3);
 
-            var filterRow = angular.element(elm.find('thead').find('tr')[1]);
+            var filterRow = ng1.element(elm.find('thead').find('tr')[1]);
             expect(filterRow.find('th').length).toBe(3);
 
-            var dataRow = angular.element(elm.find('tbody').find('tr')[0]);
+            var dataRow = ng1.element(elm.find('tbody').find('tr')[0]);
             expect(dataRow.find('td').length).toBe(3);
 
             scope.showName = false;
@@ -279,18 +281,18 @@ describe('ng-table', () => {
             expect(headerRow.find('th').length).toBe(2);
             expect(filterRow.find('th').length).toBe(2);
             expect(dataRow.find('td').length).toBe(2);
-            expect(angular.element(headerRow.find('th')[0]).text().trim()).toBe('Age');
-            expect(angular.element(headerRow.find('th')[1]).text().trim()).toBe('Money');
-            expect(angular.element(filterRow.find('th')[0]).find('input').length).toBe(0);
-            expect(angular.element(filterRow.find('th')[1]).find('select').length).toBe(1);
+            expect(ng1.element(headerRow.find('th')[0]).text().trim()).toBe('Age');
+            expect(ng1.element(headerRow.find('th')[1]).text().trim()).toBe('Money');
+            expect(ng1.element(filterRow.find('th')[0]).find('input').length).toBe(0);
+            expect(ng1.element(filterRow.find('th')[1]).find('select').length).toBe(1);
         });
     });
 
     describe('title-alt', () => {
 
-        var elm: ng.IAugmentedJQuery;
-        beforeEach(inject(function ($compile: ng.ICompileService) {
-            elm = angular.element(
+        var elm: IAugmentedJQuery;
+        beforeEach(inject(function ($compile: ICompileService) {
+            elm = ng1.element(
                 '<table ng-table="tableParams">' +
                 '<tr ng-repeat="user in $data">' +
                 '<td title="\'Name of person\'" title-alt="\'Name\'">{{user.name}}</td>' +
@@ -309,27 +311,27 @@ describe('ng-table', () => {
             scope.$digest();
         }));
 
-        it('should show as data-title-text', inject(function ($compile: ng.ICompileService) {
-            var filterRow = angular.element(elm.find('thead').find('tr')[1]);
+        it('should show as data-title-text', inject(function ($compile: ICompileService) {
+            var filterRow = ng1.element(elm.find('thead').find('tr')[1]);
             var filterCells = filterRow.find('th');
 
-            expect(angular.element(filterCells[0]).attr('data-title-text').trim()).toBe('Name');
-            expect(angular.element(filterCells[1]).attr('data-title-text').trim()).toBe('Age');
-            expect(angular.element(filterCells[2]).attr('data-title-text').trim()).toBe('£');
+            expect(ng1.element(filterCells[0]).attr('data-title-text').trim()).toBe('Name');
+            expect(ng1.element(filterCells[1]).attr('data-title-text').trim()).toBe('Age');
+            expect(ng1.element(filterCells[2]).attr('data-title-text').trim()).toBe('£');
 
             var dataRows = elm.find('tbody').find('tr');
-            var dataCells = angular.element(dataRows[0]).find('td');
-            expect(angular.element(dataCells[0]).attr('data-title-text').trim()).toBe('Name');
-            expect(angular.element(dataCells[1]).attr('data-title-text').trim()).toBe('Age');
-            expect(angular.element(dataCells[2]).attr('data-title-text').trim()).toBe('£');
+            var dataCells = ng1.element(dataRows[0]).find('td');
+            expect(ng1.element(dataCells[0]).attr('data-title-text').trim()).toBe('Name');
+            expect(ng1.element(dataCells[1]).attr('data-title-text').trim()).toBe('Age');
+            expect(ng1.element(dataCells[2]).attr('data-title-text').trim()).toBe('£');
         }));
     });
 
     describe('sorting', () => {
 
-        it('should provide $column definition', inject(function ($compile: ng.ICompileService) {
+        it('should provide $column definition', inject(function ($compile: ICompileService) {
             var columnDef: IColumnDef;
-            var elm = angular.element(
+            var elm = ng1.element(
                 '<table ng-table="tableParams">' +
                 '<tr ng-repeat="user in $data">' +
                 '<td title="\'Age\'" sortable="captureColumn($column)">{{user.age}}</td>' +
@@ -347,8 +349,8 @@ describe('ng-table', () => {
             expect(columnDef).toBeDefined();
         }));
 
-        it('should apply initial sort', inject(function ($compile: ng.ICompileService) {
-            var elm = angular.element(
+        it('should apply initial sort', inject(function ($compile: ICompileService) {
+            var elm = ng1.element(
                 '<table ng-table="tableParams">' +
                 '<tr ng-repeat="user in $data"><td title="\'Age\'" sortable="\'age\'">{{user.age}}</td></tr>' +
                 '</table>');
@@ -369,8 +371,8 @@ describe('ng-table', () => {
             expect(actualSort['age']).toBe('desc');
         }));
 
-        it('when sorting changes should trigger reload of table', inject(function ($compile: ng.ICompileService) {
-            var elm = angular.element(
+        it('when sorting changes should trigger reload of table', inject(function ($compile: ICompileService) {
+            var elm = ng1.element(
                 '<table ng-table="tableParams">' +
                 '<tr ng-repeat="user in $data"><td title="\'Age\'" sortable="\'age\'">{{user.age}}</td></tr>' +
                 '</table>');
@@ -398,10 +400,10 @@ describe('ng-table', () => {
 
     describe('paging', () => {
 
-        var elm: ng.IAugmentedJQuery;
+        var elm: IAugmentedJQuery;
 
-        beforeEach(inject(function ($compile: ng.ICompileService) {
-            elm = angular.element(
+        beforeEach(inject(function ($compile: ICompileService) {
+            elm = ng1.element(
                 '<table ng-table="tableParams">' +
                 '<tr ng-repeat="user in $data">' +
                 '<td title="\'Age\'">{{user.age}}</td>' +
@@ -458,10 +460,10 @@ describe('ng-table', () => {
 
         describe('filter specified as alias', () => {
 
-            var elm: ng.IAugmentedJQuery,
+            var elm: IAugmentedJQuery,
                 tp: INgTableParams<IPerson>;
-            beforeEach(inject(function ($compile: ng.ICompileService) {
-                elm = angular.element(
+            beforeEach(inject(function ($compile: ICompileService) {
+                elm = ng1.element(
                     '<div>' +
                     '<table ng-table="tableParams">' +
                     '<tr ng-repeat="user in $data">' +
@@ -502,7 +504,7 @@ describe('ng-table', () => {
                 expect($capturedColumn.filter()['username']).toBe('text');
             });
 
-            it('when filter changes should trigger reload of table', inject(function ($timeout: ng.ITimeoutService) {
+            it('when filter changes should trigger reload of table', inject(function ($timeout: ITimeoutService) {
                 (tp.settings().getData as jasmine.Spy).calls.reset();
 
                 tp.filter()['username'] = 'new value';
@@ -524,7 +526,7 @@ describe('ng-table', () => {
                 expect((tp.settings().getData as jasmine.Spy).calls.count()).toBe(2);
             }));
 
-            it('when filter changes should reset page number to 1', inject(function ($timeout: ng.ITimeoutService) {
+            it('when filter changes should reset page number to 1', inject(function ($timeout: ITimeoutService) {
                 // trigger initial load of data so that subsequent changes to filter will trigger reset of page #
                 tp.filter()['username'] = 'initial value';
                 scope.$digest();
@@ -545,9 +547,9 @@ describe('ng-table', () => {
 
         describe('filter specified with url', () => {
 
-            var elm: ng.IAugmentedJQuery;
-            beforeEach(inject(function ($compile: ng.ICompileService) {
-                elm = angular.element(
+            var elm: IAugmentedJQuery;
+            beforeEach(inject(function ($compile: ICompileService) {
+                elm = ng1.element(
                     '<div>' +
                     '<script type="text/ng-template" id="ng-table/filters/customNum.html"><input type="number" id="{{name}}"/></script>' +
                     '<table ng-table="tableParams">' +
@@ -574,9 +576,9 @@ describe('ng-table', () => {
 
         describe('multiple filter inputs', () => {
 
-            var elm: ng.IAugmentedJQuery;
-            beforeEach(inject(function ($compile: ng.ICompileService) {
-                elm = angular.element(
+            var elm: IAugmentedJQuery;
+            beforeEach(inject(function ($compile: ICompileService) {
+                elm = ng1.element(
                     '<div>' +
                     '<table ng-table="tableParams">' +
                     '<tr ng-repeat="user in $data">' +
@@ -621,13 +623,13 @@ describe('ng-table', () => {
         });
         describe('dynamic filter', () => {
 
-            var elm: ng.IAugmentedJQuery,
+            var elm: IAugmentedJQuery,
                 ageFilter: IFilterTemplateDefMap;
-            beforeEach(inject(function ($compile: ng.ICompileService) {
+            beforeEach(inject(function ($compile: ICompileService) {
 
                 ageFilter = { age: 'text' };
 
-                elm = angular.element(
+                elm = ng1.element(
                     '<div>' +
                     '<script type="text/ng-template" id="ng-table/filters/number.html"><input type="number" name="{{name}}"/></script>' +
                     '<table ng-table="tableParams">' +
@@ -687,10 +689,10 @@ describe('ng-table', () => {
 
         describe('filter with placeholder value and alias', () => {
 
-            var elm: ng.IAugmentedJQuery,
+            var elm: IAugmentedJQuery,
                 tp: INgTableParams<IPerson>;
-            beforeEach(inject(function ($compile: ng.ICompileService) {
-                elm = angular.element(
+            beforeEach(inject(function ($compile: ICompileService) {
+                elm = ng1.element(
                     '<div>' +
                     '<table ng-table="tableParams">' +
                     '<tr ng-repeat="user in $data">' +
@@ -737,10 +739,10 @@ describe('ng-table', () => {
 
         describe('filter with placeholder value and url', () => {
 
-            var elm: ng.IAugmentedJQuery,
+            var elm: IAugmentedJQuery,
                 tp: INgTableParams<IPerson>;
-            beforeEach(inject(function ($compile: ng.ICompileService) {
-                elm = angular.element(
+            beforeEach(inject(function ($compile: ICompileService) {
+                elm = ng1.element(
                     '<div>' +
                     '<table ng-table="tableParams">' +
                     '<tr ng-repeat="user in $data">' +
@@ -786,9 +788,9 @@ describe('ng-table', () => {
     });
 
     describe('show-filter', () => {
-        var elm: ng.IAugmentedJQuery;
-        beforeEach(inject(function ($compile: ng.ICompileService) {
-            elm = angular.element(
+        var elm: IAugmentedJQuery;
+        beforeEach(inject(function ($compile: ICompileService) {
+            elm = ng1.element(
                 '<div>' +
                 '<table ng-table="tableParams" show-filter="showFilterRow">' +
                 '<tr ng-repeat="user in $data">' +
@@ -825,10 +827,10 @@ describe('ng-table', () => {
     });
 
     describe('$columns', () => {
-        var elm: ng.IAugmentedJQuery,
+        var elm: IAugmentedJQuery,
             tp: INgTableParams<IPerson>;
-        beforeEach(inject(function ($compile: ng.ICompileService) {
-            elm = angular.element(
+        beforeEach(inject(function ($compile: ICompileService) {
+            elm = ng1.element(
                 '<div>' +
                 '<table ng-table="tableParams">' +
                 '<tr ng-repeat="user in $data">' +
@@ -949,10 +951,10 @@ describe('ng-table', () => {
 
         describe('one groupable column', () => {
 
-            var elm: ng.IAugmentedJQuery,
+            var elm: IAugmentedJQuery,
                 tp: INgTableParams<IPerson>;
-            beforeEach(inject(function ($compile: ng.ICompileService) {
-                elm = angular.element(
+            beforeEach(inject(function ($compile: ICompileService) {
+                elm = ng1.element(
                     '<div>' +
                     '<table ng-table="tableParams">' +
                     '<tr class="ng-table-group" ng-repeat-start="group in $groups"></tr>' +
@@ -986,12 +988,12 @@ describe('ng-table', () => {
 
     describe('internals', () => {
 
-        var elm: ng.IAugmentedJQuery,
-            $timeout: ng.ITimeoutService;
+        var elm: IAugmentedJQuery,
+            $timeout: ITimeoutService;
 
-        beforeEach(inject(function ($compile: ng.ICompileService, _$timeout_: ng.ITimeoutService) {
+        beforeEach(inject(function ($compile: ICompileService, _$timeout_: ITimeoutService) {
             $timeout = _$timeout_;
-            elm = angular.element(
+            elm = ng1.element(
                 '<table ng-table="tableParams">' +
                 '<tr ng-repeat="user in $data">' +
                 '<td title="\'Age\'">{{user.age}}</td>' +
@@ -1073,7 +1075,7 @@ describe('ng-table', () => {
             expect((tp.settings().getData as jasmine.Spy).calls.count()).toBe(1);
         });
 
-        it('should reload 1 time when initial load fails', inject(function ($q: ng.IQService) {
+        it('should reload 1 time when initial load fails', inject(function ($q: IQService) {
             // given
             var tp = createNgTableParams<IPerson>({
                 getData: () => {
@@ -1126,9 +1128,9 @@ describe('ng-table', () => {
             expect((tp.settings().getData as jasmine.Spy).calls.count()).toBe(1);
         });
 
-        it('change to filter that fails to load should not cause infinite reload loop', inject(function ($q: ng.IQService) {
+        it('change to filter that fails to load should not cause infinite reload loop', inject(function ($q: IQService) {
             var tp = createNgTableParams({
-                getData: function (): ng.IPromise<any> | IPerson[] {
+                getData: function (): IPromise<any> | IPerson[] {
                     if ((tp.settings().getData as jasmine.Spy).calls.count() > 1) {
                         return $q.reject('BANG!');
                     }

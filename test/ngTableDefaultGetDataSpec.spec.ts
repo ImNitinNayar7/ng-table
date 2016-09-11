@@ -1,3 +1,4 @@
+import * as ng1 from 'angular';
 import {
     IDefaultGetDataProvider, IDefaultGetData, INgTableParams, ITableParamsConstructor,
     default as coreModule
@@ -15,9 +16,9 @@ describe('ngTableDefaultGetData', () => {
 
         let ngTableDefaultGetDataProvider: IDefaultGetDataProvider;
 
-        beforeEach(angular.mock.module("ngTable-core"));
+        beforeEach(ng1.mock.module("ngTable-core"));
         beforeEach(() => {
-            angular.mock.module((_ngTableDefaultGetDataProvider_: IDefaultGetDataProvider) => {
+            ng1.mock.module((_ngTableDefaultGetDataProvider_: IDefaultGetDataProvider) => {
                 ngTableDefaultGetDataProvider = _ngTableDefaultGetDataProvider_;
             });
         });
@@ -33,7 +34,7 @@ describe('ngTableDefaultGetData', () => {
         let ngTableDefaultGetData: IDefaultGetData<any>,
             tableParams: INgTableParams<any>;
 
-        beforeEach(angular.mock.module('ngTable-core'));
+        beforeEach(ng1.mock.module('ngTable-core'));
 
         beforeEach(inject((
             _ngTableDefaultGetData_: IDefaultGetData<any>,
@@ -208,7 +209,7 @@ describe('ngTableDefaultGetData', () => {
 
                 it('function', () => {
                     // given
-                    var comparer = (actual: any, expected: any) => angular.equals(actual, expected);
+                    var comparer = (actual: any, expected: any) => ng1.equals(actual, expected);
                     tableParams.settings({ filterOptions: { filterComparator: comparer } });
                     tableParams.filter({ age: 1 });
                     // when
@@ -258,7 +259,7 @@ describe('ngTableDefaultGetData', () => {
 
         beforeEach(() => {
             // add a custom filter available to our tests
-            angular.mock.module('ngTable-core', ($provide: ng.auto.IProvideService) => {
+            ng1.mock.module('ngTable-core', ($provide: ng1.auto.IProvideService) => {
                 $provide.factory('myCustomFilterFilter', myCustomFilter)
             });
 
@@ -315,7 +316,7 @@ describe('ngTableDefaultGetData', () => {
 
         it('`this` context of custom filter function should be set to the NgTableParams instance', () => {
             // given
-            var filterFnSpy = jasmine.createSpy('filterFn', angular.identity).and.callThrough();
+            var filterFnSpy = jasmine.createSpy('filterFn', ng1.identity).and.callThrough();
             tableParams.settings({ filterOptions: { filterFn: filterFnSpy } });
             tableParams.filter({ age: 1 });
             // when

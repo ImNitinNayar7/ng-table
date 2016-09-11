@@ -9,6 +9,9 @@
   },
   "main": "index.js",
   "devDependencies": {
+    "@types/angular-mocks": "^1.5.4",
+    "@types/jasmine": "^2.2.33",
+    "@types/karma-jasmine": "0.0.27",
     "angular": "^1.5.8",
     "angular-mocks": "^1.5.8",
     "awesome-typescript-loader": "2.1.1",
@@ -42,7 +45,6 @@
     "style-loader": "^0.13.1",
     "typedoc": "^0.4.5",
     "typescript": "2.0.0",
-    "typings": "^1.2.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.20",
     "webpack-dev-server": "^2.1.0-beta.0",
@@ -56,17 +58,17 @@
     "clean": "shx rm -f index.d.ts src/browser/*.js src/browser/*.js.map src/browser/*.d.ts src/core/*.js src/core/*.js.map src/core/*.d.ts test/*.spec.js test/*.spec.js.map test/*.spec.d.ts demo-apps/ts-webpack/src/**/*.js demo-apps/ts-webpack/src/**/*.js.map",
     "predoc": "shx rm -rf docs",
     "doc": "typedoc --options typedoc.json index.ts",
-    "setup": "npm run typings",
     "test": "karma start --single-run --no-auto-watch",
     "test:debug": "karma start --no-single-run --no-auto-watch",
     "tsc": "tsc",
-    "typings": "typings install",
     "validate-webpack": "webpack-validator webpack.config.js --env.dev --env.test --env.prod",
     "watch:debug": "webpack --watch --env.debug",
     "watch": "webpack --watch",
     "webpack": "webpack"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/angular": "^1.5.13"
+  },
   "peerDependencies": {
     "angular": "^1.2"
   }

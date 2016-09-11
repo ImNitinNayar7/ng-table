@@ -1,4 +1,4 @@
-import * as ng1 from 'angular';
+import { IFilterOrderBy, IPromise, IScope, IServiceProvider } from 'angular';
 
 export interface IDataSettings {
     applyPaging?: boolean;
@@ -50,13 +50,13 @@ export interface IDefaultGetData<T> {
     /**
      * Returns a reference to the function that this service will use to sort data rows
      */
-    getOrderByFn(params?: INgTableParams<T>): ng1.IFilterOrderBy
+    getOrderByFn(params?: INgTableParams<T>): IFilterOrderBy
 }
 
 /**
  * Allows for the configuration of the {@link IDefaultGetData} service.
  */
-export interface IDefaultGetDataProvider extends ng1.IServiceProvider {
+export interface IDefaultGetDataProvider extends IServiceProvider {
     /**
      * The name of a angular filter that knows how to apply the values returned by
      * `NgTableParams.filter()` to restrict an array of data.
@@ -209,7 +209,7 @@ export interface INgTableParams<T> {
     /**
      * Trigger a reload of the data rows
      */
-    reload<TResult extends DataResult<T>>(): ng.IPromise<TResult[]>
+    reload<TResult extends DataResult<T>>(): IPromise<TResult[]>
     /**
      * Returns the settings for the table.
      */
@@ -346,7 +346,7 @@ export interface IFilterSettings<T> {
  * @param params the table requesting the data rows
  */
 export interface IGetDataFunc<T> {
-    (params: INgTableParams<T>): T[] | ng.IPromise<T[]>;
+    (params: INgTableParams<T>): T[] | IPromise<T[]>;
 }
 
 /**
@@ -575,7 +575,7 @@ export interface IEventsChannel {
      * @param eventFilter a predicate function that should return true to receive the event
      * @return a unregistration function that when called will unregister the `listener`
      */
-    onAfterCreated(listener: IAfterCreatedListener, scope: ng.IScope, eventFilter?: IEventSelectorFunc): IUnregistrationFunc;
+    onAfterCreated(listener: IAfterCreatedListener, scope: IScope, eventFilter?: IEventSelectorFunc): IUnregistrationFunc;
     /**
      * Subscribe to receive notification whenever a new `NgTableParams` instance has finished being constructed.
      * Optionally supply an `eventFilter` to restrict which events that should trigger the `listener` to be called.
@@ -595,7 +595,7 @@ export interface IEventsChannel {
      * @param eventFilter either the specific `NgTableParams` instance you want to receive events for or a predicate function that should return true to receive the event
      * @return a unregistration function that when called will unregister the `listener`
      */
-    onAfterReloadData<T>(listener: IAfterReloadDataListener<T>, scope: ng.IScope, eventFilter?: EventSelector<T>): IUnregistrationFunc;
+    onAfterReloadData<T>(listener: IAfterReloadDataListener<T>, scope: IScope, eventFilter?: EventSelector<T>): IUnregistrationFunc;
     /**
      * Subscribe to receive notification whenever the `reload` method of an `NgTableParams` instance has successfully executed
      * Optionally supply an `eventFilter` to restrict which events that should trigger the `listener` to be called.
@@ -616,7 +616,7 @@ export interface IEventsChannel {
      * @param eventFilter either the specific `NgTableParams` instance you want to receive events for or a predicate function that should return true to receive the event
      * @return a unregistration function that when called will unregister the `listener`
      */
-    onDatasetChanged<T>(listener: IDatasetChangedListener<T>, scope: ng.IScope, eventFilter?: EventSelector<T>): IUnregistrationFunc;
+    onDatasetChanged<T>(listener: IDatasetChangedListener<T>, scope: IScope, eventFilter?: EventSelector<T>): IUnregistrationFunc;
     /**
      * Subscribe to receive notification whenever a new data rows *array* is supplied as a `settings` value to a `NgTableParams` instance.
      * Optionally supply an `eventFilter` to restrict which events that should trigger the `listener` to be called.
@@ -637,7 +637,7 @@ export interface IEventsChannel {
      * @param eventFilter either the specific `NgTableParams` instance you want to receive events for or a predicate function that should return true to receive the event
      * @return a unregistration function that when called will unregister the `listener`
      */
-    onPagesChanged<T>(listener: IPagesChangedListener, scope: ng.IScope, eventFilter?: EventSelector<T>): IUnregistrationFunc;
+    onPagesChanged<T>(listener: IPagesChangedListener, scope: IScope, eventFilter?: EventSelector<T>): IUnregistrationFunc;
     /**
      * Subscribe to receive notification whenever the paging buttons for an `NgTableParams` instance change
      * Optionally supply an `eventFilter` to restrict which events that should trigger the `listener` to be called.

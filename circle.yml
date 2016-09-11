@@ -7,7 +7,6 @@ dependencies:
     - npm install -g grunt-cli
     - npm install -g karma-cli
     - npm prune && npm install
-    - npm run setup
     - npm run build
   cache_directories:
     - node_modules

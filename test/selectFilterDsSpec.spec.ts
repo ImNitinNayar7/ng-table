@@ -1,24 +1,26 @@
+import { ICompileService, IScope, ITimeoutService } from 'angular';
+import * as ng1 from 'angular';
 import { SelectData, ISelectOption, default as browserModule } from '../src/browser';
 
 describe('ngTableSelectFilterDs directive', () => {
 
-    interface IColumnScope extends ng.IScope {
+    interface IColumnScope extends IScope {
         $column?: { data?: SelectData };
         $selectData?: ISelectOption[];
     }
 
-    interface ITableScope extends ng.IScope {
+    interface ITableScope extends IScope {
         $new(): IColumnScope;
     }
 
     let $scope: IColumnScope,
         elem: string,
-        $compile: ng.ICompileService;
+        $compile: ICompileService;
 
     beforeAll(() => expect(browserModule).toBeDefined());
-    beforeEach(angular.mock.module('ngTable-browser'));
+    beforeEach(ng1.mock.module('ngTable-browser'));
 
-    beforeEach(inject(($rootScope: ITableScope, _$compile_: ng.ICompileService) => {
+    beforeEach(inject(($rootScope: ITableScope, _$compile_: ICompileService) => {
         $scope = $rootScope.$new();
         $compile = _$compile_;
         elem = '<select ng-table-select-filter-ds="$column"></select>';
@@ -228,8 +230,8 @@ describe('ngTableSelectFilterDs directive', () => {
 
     describe('asyn function datasource', () => {
         let data: ISelectOption[];
-        let $timeout: ng.ITimeoutService;
-        beforeEach(inject((_$timeout_: ng.ITimeoutService) => {
+        let $timeout: ITimeoutService;
+        beforeEach(inject((_$timeout_: ITimeoutService) => {
             $timeout = _$timeout_;
             $scope.$column = {
                 data: () => $timeout(() => data, 10)

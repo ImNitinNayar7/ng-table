@@ -8,7 +8,6 @@ before_install:
 
 install:
   - npm prune && npm install
-  - npm run setup
   - npm run build
 
 script:

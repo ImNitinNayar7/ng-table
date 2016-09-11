@@ -15,8 +15,7 @@
   "include": [
     "src/**/*",
     "test/**/*",
-    "./*",
-    "typings/index.d.ts"
+    "./*"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,3 +1,5 @@
+import { IControllerService, IQService, IScope } from 'angular';
+import * as ng1 from 'angular';
 import {
     IDataRowGroup, IDefaultGetData, IDefaults, IEventsChannel, IGroupingFunc, IGroupValues, InternalTableParams,
     INgTableParams, IPageButton, IParamValues, ISettings, ITableParamsConstructor,
@@ -5,19 +7,19 @@ import {
 } from '../src/core';
 
 describe('NgTableParams', () => {
-    interface IScopeWithPrivates extends ng.IScope {
+    interface IScopeWithPrivates extends IScope {
         $$listenerCount: { [name: string]: number }
     }
 
-    var scope: ng.IScope,
+    var scope: IScope,
         NgTableParams: ITableParamsConstructor<any>,
         $rootScope: IScopeWithPrivates;
     
     beforeAll(() => expect(coreModule).toBeDefined());
 
-    beforeEach(angular.mock.module("ngTable-core"));
+    beforeEach(ng1.mock.module("ngTable-core"));
     beforeEach(() => {
-        angular.mock.module(($provide: ng.auto.IProvideService) => {
+        ng1.mock.module(($provide: ng1.auto.IProvideService) => {
             $provide.decorator('ngTableDefaultGetData', createSpy);
 
 
@@ -28,7 +30,7 @@ describe('NgTableParams', () => {
         });
     });
 
-    beforeEach(inject(($controller: ng.IControllerService, _$rootScope_: IScopeWithPrivates, _NgTableParams_: ITableParamsConstructor<any>) => {
+    beforeEach(inject(($controller: IControllerService, _$rootScope_: IScopeWithPrivates, _NgTableParams_: ITableParamsConstructor<any>) => {
         $rootScope = _$rootScope_;
         scope = $rootScope.$new();
         NgTableParams = _NgTableParams_;
@@ -43,8 +45,8 @@ describe('NgTableParams', () => {
             settings = arguments[1];
         }
 
-        settings = angular.extend({}, settings);
-        settings.filterOptions = angular.extend({}, {
+        settings = ng1.extend({}, settings);
+        settings.filterOptions = ng1.extend({}, {
             filterDelay: 0
         }, settings.filterOptions);
         var tableParams = new NgTableParams(initialParams, settings);
@@ -221,13 +223,13 @@ describe('NgTableParams', () => {
 
         it('one group function', () => {
             var params = new NgTableParams({
-                group: angular.identity
+                group: ng1.identity
             });
 
             expect(params.hasGroup()).toBe(true);
-            expect(params.hasGroup(angular.identity)).toBe(true);
-            expect(params.hasGroup(angular.identity, params.settings().groupOptions.defaultSort)).toBe(true);
-            expect(params.group()).toEqual(angular.identity);
+            expect(params.hasGroup(ng1.identity)).toBe(true);
+            expect(params.hasGroup(ng1.identity, params.settings().groupOptions.defaultSort)).toBe(true);
+            expect(params.group()).toEqual(ng1.identity);
 
 
             var fn: IGroupingFunc<any> = () => '';
@@ -257,7 +259,7 @@ describe('NgTableParams', () => {
                     groupOptions: { defaultSort: 'desc' }
                 });
 
-            var newGroups = _.extend<{}, IGroupValues>({}, params.group(), { age: 'desc' });
+            var newGroups = _.extend<IGroupValues>({}, params.group(), { age: 'desc' });
             params.group(newGroups);
             expect(params.hasGroup()).toBe(true);
             expect(params.hasGroup('role')).toBe(true);
@@ -423,7 +425,7 @@ describe('NgTableParams', () => {
             expect(ngTableDefaultGetData).toHaveBeenCalled();
         }));
 
-        it('should propagate rejection reason from getData', inject(($q: ng.IQService) => {
+        it('should propagate rejection reason from getData', inject(($q: IQService) => {
             // given
             var tp = createNgTableParams({ getData: () => $q.reject('bad response') });
 
@@ -957,7 +959,7 @@ describe('NgTableParams', () => {
         });
     });
 
-    it('ngTableParams test defaults', inject(($q: ng.IQService, ngTableDefaults: IDefaults) => {
+    it('ngTableParams test defaults', inject(($q: IQService, ngTableDefaults: IDefaults) => {
         ngTableDefaults.params.count = 2;
         ngTableDefaults.settings.counts = [];
         var tp = new NgTableParams();
@@ -970,7 +972,7 @@ describe('NgTableParams', () => {
         expect(settings.interceptors.length).toEqual(0);
         expect(settings.filterOptions.filterDelay).toEqual(500);
 
-        ngTableDefaults.settings.interceptors = [{ response: angular.identity }];
+        ngTableDefaults.settings.interceptors = [{ response: ng1.identity }];
         tp = new NgTableParams();
         expect(tp.settings().interceptors.length).toEqual(1);
     }));
@@ -1032,14 +1034,14 @@ describe('NgTableParams', () => {
             expect(tp.isDataReloadRequired()).toBe(false);
         });
 
-        it('should return false when getData fails', inject(($q: ng.IQService) => {
+        it('should return false when getData fails', inject(($q: IQService) => {
             tp.settings({ getData: () => $q.reject('bad response') });
             tp.reload();
             scope.$digest();
             expect(tp.isDataReloadRequired()).toBe(false);
         }));
 
-        it('should detect direct changes to parameters', inject(($q: ng.IQService) => {
+        it('should detect direct changes to parameters', inject(($q: IQService) => {
             // given
             tp.reload();
             scope.$digest();
@@ -1172,14 +1174,14 @@ describe('NgTableParams', () => {
             expect(tp.hasFilterChanges()).toBe(false);
         });
 
-        it('should return true when getData fails', inject(($q: ng.IQService) => {
+        it('should return true when getData fails', inject(($q: IQService) => {
             tp.settings({ getData: () => $q.reject('bad response') });
             tp.reload();
             scope.$digest();
             expect(tp.hasFilterChanges()).toBe(false);
         }));
 
-        it('should detect direct changes to filters', inject(($q: ng.IQService) => {
+        it('should detect direct changes to filters', inject(($q: IQService) => {
             // given
             tp.reload();
             scope.$digest();
@@ -1240,7 +1242,7 @@ describe('NgTableParams', () => {
     describe('hasErrorState', () => {
         var tp: INgTableParams<{}>;
 
-        it('should return false until reload fails', inject(($q: ng.IQService) => {
+        it('should return false until reload fails', inject(($q: IQService) => {
             // given
             tp = createNgTableParams({
                 getData: () => {
@@ -1263,7 +1265,7 @@ describe('NgTableParams', () => {
             expect(tp.hasErrorState()).toBe(true);
         }));
 
-        it('should return false once parameter values change', inject(($q: ng.IQService) => {
+        it('should return false once parameter values change', inject(($q: IQService) => {
             // given
             tp = createNgTableParams({ getData: () => $q.reject('bad response') });
 
@@ -1279,20 +1281,20 @@ describe('NgTableParams', () => {
     describe('interceptors', () => {
 
         it('can register interceptor', () => {
-            var interceptor = { response: angular.identity };
+            var interceptor = { response: ng1.identity };
             var tp = createNgTableParams({ interceptors: [interceptor] });
             expect(tp.settings().interceptors).toEqual([interceptor]);
         });
 
         it('can register multiple interceptor', () => {
-            var interceptors = [{ response: angular.identity }, { response: angular.identity }];
+            var interceptors = [{ response: ng1.identity }, { response: ng1.identity }];
             var tp = createNgTableParams({ interceptors: interceptors });
             expect(tp.settings().interceptors).toEqual(interceptors);
         });
 
         it('can register interceptors after NgTableParams created', () => {
-            var interceptor = { response: angular.identity };
-            var interceptor2 = { response: angular.identity };
+            var interceptor = { response: ng1.identity };
+            var interceptor2 = { response: ng1.identity };
             var tp = createNgTableParams({ interceptors: [interceptor] });
             var interceptors = tp.settings().interceptors.concat([interceptor2]);
             tp.settings({ interceptors: interceptors });
@@ -1393,7 +1395,7 @@ describe('NgTableParams', () => {
 
         describe('one responseError interceptor', () => {
 
-            it('should receive rejections from getData', inject(($q: ng.IQService) => {
+            it('should receive rejections from getData', inject(($q: IQService) => {
                 // given
                 var interceptor = {
                     actualReason: '',
@@ -1434,7 +1436,7 @@ describe('NgTableParams', () => {
                 expect(interceptor.hasRun).toBeFalsy();
             });
 
-            it('should be able to modify reason returned by getData', inject(($q: ng.IQService) => {
+            it('should be able to modify reason returned by getData', inject(($q: IQService) => {
                 interface IResponseError {
                     description: string;
                     code?: number;
@@ -1464,7 +1466,7 @@ describe('NgTableParams', () => {
                 expect(actualReason.description).toBe('crappy data');
             }));
 
-            it('should be able to replace reason returned by getData', inject(($q: ng.IQService) => {
+            it('should be able to replace reason returned by getData', inject(($q: IQService) => {
                 // given
                 var interceptor = {
                     responseError: (/*reason, params*/) => $q.reject('Cancelled by user')
@@ -1506,7 +1508,7 @@ describe('NgTableParams', () => {
 
         describe('one response plus responseError interceptor', () => {
 
-            it('should NOT call responseError on same interceptor whose response method fails', inject(($q: ng.IQService) => {
+            it('should NOT call responseError on same interceptor whose response method fails', inject(($q: IQService) => {
                 // given
                 var interceptor = {
                     hasRun: false,
@@ -1541,7 +1543,7 @@ describe('NgTableParams', () => {
                         callCount++;
                     }
                 };
-                var interceptors = [interceptor, angular.copy(interceptor)];
+                var interceptors = [interceptor, ng1.copy(interceptor)];
                 var tp = createNgTableParams({ interceptors: interceptors });
 
                 // when
@@ -1577,7 +1579,7 @@ describe('NgTableParams', () => {
 
         describe('multiple response and responseError interceptors', () => {
 
-            it('responseError of next interceptor should receive failures from previous interceptor', inject(($q: ng.IQService) => {
+            it('responseError of next interceptor should receive failures from previous interceptor', inject(($q: IQService) => {
                 // given
                 var badInterceptor = {
                     response: (/*data, params*/) => $q.reject('BANG!')
@@ -1598,7 +1600,7 @@ describe('NgTableParams', () => {
                 expect(nextInterceptor.hasRun).toBe(true);
             }));
 
-            it('should call next response interceptor when previous interceptor recovers from failure', inject(($q: ng.IQService) => {
+            it('should call next response interceptor when previous interceptor recovers from failure', inject(($q: IQService) => {
                 // given
                 var badInterceptor = {
                     response: (/*data, params*/) => $q.reject('BANG!')

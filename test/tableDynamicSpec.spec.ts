@@ -1,3 +1,5 @@
+import { IAugmentedJQuery, ICompileService, IQService, IScope } from 'angular';
+import * as ng1 from 'angular';
 import { ngTable } from '../index';
 import { INgTableParams, ITableParamsConstructor } from '../src/core';
 import { ColumnFieldContext, DynamicTableColField, IDynamicTableColDef, IFilterTemplateDefMap, ISelectOption } from '../src/browser';
@@ -17,7 +19,7 @@ describe('ng-table-dynamic', () => {
         field: DynamicTableColField<string>
 }
 
-    interface ICustomizedScope extends ng.IScope {
+    interface ICustomizedScope extends IScope {
         tableParams: INgTableParams<IPerson>;
         cols: IExtendedDynamicTableColDef[];
     }
@@ -43,17 +45,17 @@ describe('ng-table-dynamic', () => {
     ];
 
     beforeAll(() => expect(ngTable).toBeDefined());
-    beforeEach(angular.mock.module('ngTable'));
+    beforeEach(ng1.mock.module('ngTable'));
 
     var scope: ICustomizedScope;
-    beforeEach(inject(($rootScope: ng.IScope) => {
+    beforeEach(inject(($rootScope: IScope) => {
         scope = $rootScope.$new(true) as ICustomizedScope;
     }));
 
     describe('basics', () => {
-        var elm: ng.IAugmentedJQuery;
-        beforeEach(inject(function ($compile: ng.ICompileService, $q: ng.IQService, NgTableParams: ITableParamsConstructor<any>) {
-            elm = angular.element(
+        var elm: IAugmentedJQuery;
+        beforeEach(inject(function ($compile: ICompileService, $q: IQService, NgTableParams: ITableParamsConstructor<any>) {
+            elm = ng1.element(
                 '<div>' +
                 '<table ng-table-dynamic="tableParams with cols">' +
                 '<tr ng-repeat="user in $data">' +
@@ -119,49 +121,49 @@ describe('ng-table-dynamic', () => {
             var rows = thead.find('tr');
             expect(rows.length).toBe(2);
 
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
 
             expect(titles.length).toBe(3);
-            expect(angular.element(titles[0]).text().trim()).toBe('Name of person');
-            expect(angular.element(titles[1]).text().trim()).toBe('Age');
-            expect(angular.element(titles[2]).text().trim()).toBe('Money');
+            expect(ng1.element(titles[0]).text().trim()).toBe('Name of person');
+            expect(ng1.element(titles[1]).text().trim()).toBe('Age');
+            expect(ng1.element(titles[2]).text().trim()).toBe('Money');
 
-            expect(angular.element(rows[1]).hasClass('ng-table-filters')).toBeTruthy();
-            var filters = angular.element(rows[1]).find('th');
+            expect(ng1.element(rows[1]).hasClass('ng-table-filters')).toBeTruthy();
+            var filters = ng1.element(rows[1]).find('th');
             expect(filters.length).toBe(3);
-            expect(angular.element(filters[0]).hasClass('filter')).toBeTruthy();
-            expect(angular.element(filters[1]).hasClass('filter')).toBeTruthy();
-            expect(angular.element(filters[2]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[0]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[1]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[2]).hasClass('filter')).toBeTruthy();
         });
 
-        it('should create table header classes', inject(function ($compile: ng.ICompileService, $rootScope: ng.IScope) {
+        it('should create table header classes', inject(function ($compile: ICompileService, $rootScope: IScope) {
 
             var thead = elm.find('thead');
             var rows = thead.find('tr');
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
 
-            expect(angular.element(titles[0]).hasClass('header')).toBeTruthy();
-            expect(angular.element(titles[1]).hasClass('header')).toBeTruthy();
-            expect(angular.element(titles[2]).hasClass('header')).toBeTruthy();
+            expect(ng1.element(titles[0]).hasClass('header')).toBeTruthy();
+            expect(ng1.element(titles[1]).hasClass('header')).toBeTruthy();
+            expect(ng1.element(titles[2]).hasClass('header')).toBeTruthy();
 
-            expect(angular.element(titles[0]).hasClass('sortable')).toBeTruthy();
-            expect(angular.element(titles[1]).hasClass('sortable')).toBeTruthy();
-            expect(angular.element(titles[2]).hasClass('sortable')).toBeFalsy();
+            expect(ng1.element(titles[0]).hasClass('sortable')).toBeTruthy();
+            expect(ng1.element(titles[1]).hasClass('sortable')).toBeTruthy();
+            expect(ng1.element(titles[2]).hasClass('sortable')).toBeFalsy();
 
-            expect(angular.element(titles[0]).hasClass('customClass')).toBeTruthy();
-            expect(angular.element(titles[1]).hasClass('customClass')).toBeTruthy();
-            expect(angular.element(titles[2]).hasClass('moneyHeaderClass')).toBeTruthy();
+            expect(ng1.element(titles[0]).hasClass('customClass')).toBeTruthy();
+            expect(ng1.element(titles[1]).hasClass('customClass')).toBeTruthy();
+            expect(ng1.element(titles[2]).hasClass('moneyHeaderClass')).toBeTruthy();
         }));
 
         it('should create table header titles', () => {
 
             var thead = elm.find('thead');
             var rows = thead.find('tr');
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
 
-            expect(angular.element(titles[0]).attr('title').trim()).toBe('Sort by Name');
-            expect(angular.element(titles[1]).attr('title').trim()).toBe('Sort by Age');
-            expect(angular.element(titles[2]).attr('title').trim()).toBe('Sort by Money');
+            expect(ng1.element(titles[0]).attr('title').trim()).toBe('Sort by Name');
+            expect(ng1.element(titles[1]).attr('title').trim()).toBe('Sort by Age');
+            expect(ng1.element(titles[2]).attr('title').trim()).toBe('Sort by Money');
         });
 
         it('should show data-title-text', inject(function (NgTableParams: ITableParamsConstructor<IPerson>) {
@@ -175,17 +177,17 @@ describe('ng-table-dynamic', () => {
                 });
             scope.$digest();
 
-            var filterRow = angular.element(elm.find('thead').find('tr')[1]);
+            var filterRow = ng1.element(elm.find('thead').find('tr')[1]);
             var filterCells = filterRow.find('th');
-            expect(angular.element(filterCells[0]).attr('data-title-text').trim()).toBe('Name of person');
-            expect(angular.element(filterCells[1]).attr('data-title-text').trim()).toBe('Age');
-            expect(angular.element(filterCells[2]).attr('data-title-text').trim()).toBe('Money');
+            expect(ng1.element(filterCells[0]).attr('data-title-text').trim()).toBe('Name of person');
+            expect(ng1.element(filterCells[1]).attr('data-title-text').trim()).toBe('Age');
+            expect(ng1.element(filterCells[2]).attr('data-title-text').trim()).toBe('Money');
 
             var dataRows = elm.find('tbody').find('tr');
-            var dataCells = angular.element(dataRows[0]).find('td');
-            expect(angular.element(dataCells[0]).attr('data-title-text').trim()).toBe('Name of person');
-            expect(angular.element(dataCells[1]).attr('data-title-text').trim()).toBe('Age');
-            expect(angular.element(dataCells[2]).attr('data-title-text').trim()).toBe('Money');
+            var dataCells = ng1.element(dataRows[0]).find('td');
+            expect(ng1.element(dataCells[0]).attr('data-title-text').trim()).toBe('Name of person');
+            expect(ng1.element(dataCells[1]).attr('data-title-text').trim()).toBe('Age');
+            expect(ng1.element(dataCells[2]).attr('data-title-text').trim()).toBe('Money');
         }));
 
         it('should show/hide columns', inject(function (NgTableParams: ITableParamsConstructor<IPerson>) {
@@ -199,13 +201,13 @@ describe('ng-table-dynamic', () => {
                 });
             scope.$digest();
 
-            var headerRow = angular.element(elm.find('thead').find('tr')[0]);
+            var headerRow = ng1.element(elm.find('thead').find('tr')[0]);
             expect(headerRow.find('th').length).toBe(3);
 
-            var filterRow = angular.element(elm.find('thead').find('tr')[1]);
+            var filterRow = ng1.element(elm.find('thead').find('tr')[1]);
             expect(filterRow.find('th').length).toBe(3);
 
-            var dataRow = angular.element(elm.find('tbody').find('tr')[0]);
+            var dataRow = ng1.element(elm.find('tbody').find('tr')[0]);
             expect(dataRow.find('td').length).toBe(3);
 
             scope.cols[0].show = false;
@@ -213,16 +215,16 @@ describe('ng-table-dynamic', () => {
             expect(headerRow.find('th').length).toBe(2);
             expect(filterRow.find('th').length).toBe(2);
             expect(dataRow.find('td').length).toBe(2);
-            expect(angular.element(headerRow.find('th')[0]).text().trim()).toBe('Age');
-            expect(angular.element(headerRow.find('th')[1]).text().trim()).toBe('Money');
-            expect(angular.element(filterRow.find('th')[0]).find('input').length).toBe(0);
-            expect(angular.element(filterRow.find('th')[1]).find('select').length).toBe(1);
+            expect(ng1.element(headerRow.find('th')[0]).text().trim()).toBe('Age');
+            expect(ng1.element(headerRow.find('th')[1]).text().trim()).toBe('Money');
+            expect(ng1.element(filterRow.find('th')[0]).find('input').length).toBe(0);
+            expect(ng1.element(filterRow.find('th')[1]).find('select').length).toBe(1);
         }));
     });
     describe('changing column list', () => {
-        var elm: ng.IAugmentedJQuery;
-        beforeEach(inject(function ($compile: ng.ICompileService, $q: ng.IQService, NgTableParams: ITableParamsConstructor<IPerson>) {
-            elm = angular.element(
+        var elm: IAugmentedJQuery;
+        beforeEach(inject(function ($compile: ICompileService, $q: IQService, NgTableParams: ITableParamsConstructor<IPerson>) {
+            elm = ng1.element(
                 '<div>' +
                 '<table ng-table-dynamic="tableParams with cols">' +
                 '<tr ng-repeat="user in $data">' +
@@ -290,22 +292,22 @@ describe('ng-table-dynamic', () => {
             var rows = thead.find('tr');
             expect(rows.length).toBe(2);
 
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
 
             expect(titles.length).toBe(3);
-            expect(angular.element(titles[0]).text().trim()).toBe('Name of person');
-            expect(angular.element(titles[1]).text().trim()).toBe('Age');
-            expect(angular.element(titles[2]).text().trim()).toBe('Money');
+            expect(ng1.element(titles[0]).text().trim()).toBe('Name of person');
+            expect(ng1.element(titles[1]).text().trim()).toBe('Age');
+            expect(ng1.element(titles[2]).text().trim()).toBe('Money');
 
-            var filterRow = angular.element(rows[1]);
+            var filterRow = ng1.element(rows[1]);
             expect(filterRow.hasClass('ng-table-filters')).toBeTruthy();
             expect(filterRow.hasClass("ng-hide")).toBe(false);
 
             var filters = filterRow.find('th');
             expect(filters.length).toBe(3);
-            expect(angular.element(filters[0]).hasClass('filter')).toBeTruthy();
-            expect(angular.element(filters[1]).hasClass('filter')).toBeTruthy();
-            expect(angular.element(filters[2]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[0]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[1]).hasClass('filter')).toBeTruthy();
+            expect(ng1.element(filters[2]).hasClass('filter')).toBeTruthy();
 
         });
 
@@ -316,11 +318,11 @@ describe('ng-table-dynamic', () => {
             expect(thead.length).toBe(1);
 
             var rows = thead.find('tr');
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
             expect(titles.length).toBe(1);
-            expect(angular.element(titles[0]).text().trim()).toBe('Age');
+            expect(ng1.element(titles[0]).text().trim()).toBe('Age');
 
-            var filterRow = angular.element(rows[1]);
+            var filterRow = ng1.element(rows[1]);
             expect(filterRow.hasClass("ng-hide")).toBe(true);
         });
 
@@ -331,10 +333,10 @@ describe('ng-table-dynamic', () => {
             expect(thead.length).toBe(1);
 
             var rows = thead.find('tr');
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
             expect(titles.length).toBe(0);
 
-            var filterRow = angular.element(rows[1]);
+            var filterRow = ng1.element(rows[1]);
             expect(filterRow.hasClass("ng-hide")).toBe(true);
 
             expect(filterRow.find('th').length).toBe(0);
@@ -343,9 +345,9 @@ describe('ng-table-dynamic', () => {
     });
     describe('title-alt', () => {
 
-        var elm: ng.IAugmentedJQuery;
-        beforeEach(inject(function ($compile: ng.ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
-            elm = angular.element(
+        var elm: IAugmentedJQuery;
+        beforeEach(inject(function ($compile: ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
+            elm = ng1.element(
                 '<table ng-table-dynamic="tableParams with cols">' +
                 '<tr ng-repeat="user in $data">' +
                 '<td ng-repeat="col in $columns">{{user[col.field]}}</td>' +
@@ -368,27 +370,27 @@ describe('ng-table-dynamic', () => {
             scope.$digest();
         }));
 
-        it('should show as data-title-text', inject(function ($compile: ng.ICompileService) {
-            var filterRow = angular.element(elm.find('thead').find('tr')[1]);
+        it('should show as data-title-text', inject(function ($compile: ICompileService) {
+            var filterRow = ng1.element(elm.find('thead').find('tr')[1]);
             var filterCells = filterRow.find('th');
 
-            expect(angular.element(filterCells[0]).attr('data-title-text').trim()).toBe('Name');
-            expect(angular.element(filterCells[1]).attr('data-title-text').trim()).toBe('Age');
-            expect(angular.element(filterCells[2]).attr('data-title-text').trim()).toBe('£');
+            expect(ng1.element(filterCells[0]).attr('data-title-text').trim()).toBe('Name');
+            expect(ng1.element(filterCells[1]).attr('data-title-text').trim()).toBe('Age');
+            expect(ng1.element(filterCells[2]).attr('data-title-text').trim()).toBe('£');
 
             var dataRows = elm.find('tbody').find('tr');
-            var dataCells = angular.element(dataRows[0]).find('td');
-            expect(angular.element(dataCells[0]).attr('data-title-text').trim()).toBe('Name');
-            expect(angular.element(dataCells[1]).attr('data-title-text').trim()).toBe('Age');
-            expect(angular.element(dataCells[2]).attr('data-title-text').trim()).toBe('£');
+            var dataCells = ng1.element(dataRows[0]).find('td');
+            expect(ng1.element(dataCells[0]).attr('data-title-text').trim()).toBe('Name');
+            expect(ng1.element(dataCells[1]).attr('data-title-text').trim()).toBe('Age');
+            expect(ng1.element(dataCells[2]).attr('data-title-text').trim()).toBe('£');
         }));
     });
 
     describe('filters', () => {
 
-        var elm: ng.IAugmentedJQuery;
-        beforeEach(inject(function ($compile: ng.ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
-            elm = angular.element(
+        var elm: IAugmentedJQuery;
+        beforeEach(inject(function ($compile: ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
+            elm = ng1.element(
                 '<table ng-table-dynamic="tableParams with cols">' +
                 '<tr ng-repeat="user in $data">' +
                 '<td ng-repeat="col in $columns">{{user[col.field]}}</td>' +
@@ -398,7 +400,7 @@ describe('ng-table-dynamic', () => {
 
         describe('filter specified as alias', () => {
 
-            beforeEach(inject(function ($compile: ng.ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
+            beforeEach(inject(function ($compile: ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
                 scope.cols = [
                     { field: 'name', filter: { username: 'text' } }
                 ];
@@ -434,7 +436,7 @@ describe('ng-table-dynamic', () => {
 
         describe('select filter', () => {
 
-            beforeEach(inject(function ($compile: ng.ICompileService, $q: ng.IQService, NgTableParams: ITableParamsConstructor<IPerson>) {
+            beforeEach(inject(function ($compile: ICompileService, $q: IQService, NgTableParams: ITableParamsConstructor<IPerson>) {
                 scope.cols = [{
                     field: 'name',
                     filter: { username: 'select' },
@@ -497,7 +499,7 @@ describe('ng-table-dynamic', () => {
 
             it('should render select list return as a promise', () => {
                 var inputs = elm.find('thead').find('tr').eq(1).find('th').eq(1).find('select');
-                var select = inputs.eq(0) as ng.IAugmentedJQuery;
+                var select = inputs.eq(0) as IAugmentedJQuery;
                 expect((select[0] as HTMLSelectElement).options.length).toBeGreaterThan(0);
                 var $column = (select.scope() as ColumnFieldContext).$column;
                 var plucker = _.partialRight(_.pick, ['id', 'title']);
@@ -516,7 +518,7 @@ describe('ng-table-dynamic', () => {
 
             it('should render select list return as an array', () => {
                 var inputs = elm.find('thead').find('tr').eq(1).find('th').eq(2).find('select');
-                var select = inputs.eq(0) as ng.IAugmentedJQuery;
+                var select = inputs.eq(0) as IAugmentedJQuery;
                 expect((select[0] as HTMLSelectElement).options.length).toBeGreaterThan(0);
                 var $column = (select.scope() as ColumnFieldContext).$column;
                 var plucker = _.partialRight(_.pick, ['id', 'title']);
@@ -536,7 +538,7 @@ describe('ng-table-dynamic', () => {
 
         describe('multiple filter inputs', () => {
 
-            beforeEach(inject(function ($compile: ng.ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
+            beforeEach(inject(function ($compile: ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
                 scope.cols = [
                     { field: 'name', filter: { name: 'text', age: 'text' } }
                 ];
@@ -568,7 +570,7 @@ describe('ng-table-dynamic', () => {
         describe('dynamic filter', () => {
 
             var ageFilter: IFilterTemplateDefMap;
-            beforeEach(inject(function ($compile: ng.ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
+            beforeEach(inject(function ($compile: ICompileService, NgTableParams: ITableParamsConstructor<IPerson>) {
 
                 ageFilter = { age: 'text' };
                 function getFilter(paramsScope: ColumnFieldContext): IFilterTemplateDefMap {
@@ -613,9 +615,9 @@ describe('ng-table-dynamic', () => {
                 expect(ageInput.val()).toBe('10');
             });
 
-            it('should render new template as filter changes', inject(function ($compile: ng.ICompileService) {
+            it('should render new template as filter changes', inject(function ($compile: ICompileService) {
 
-                var scriptTemplate = angular.element(
+                var scriptTemplate = ng1.element(
                     '<script type="text/ng-template" id="ng-table/filters/number.html"><input type="number" name="{{name}}"/></script>');
                 $compile(scriptTemplate)(scope);
 
@@ -630,17 +632,17 @@ describe('ng-table-dynamic', () => {
     });
 
     describe('reorder columns', () => {
-        var elm: ng.IAugmentedJQuery;
+        var elm: IAugmentedJQuery;
         var getTitles = () => {
             var thead = elm.find('thead');
             var rows = thead.find('tr');
-            var titles = angular.element(rows[0]).find('th');
+            var titles = ng1.element(rows[0]).find('th');
 
-            return angular.element(titles).text().trim().split(/\s+/g)
+            return ng1.element(titles).text().trim().split(/\s+/g)
         };
 
-        beforeEach(inject(function ($compile: ng.ICompileService, $q: ng.IQService, NgTableParams: ITableParamsConstructor<IPerson>) {
-            elm = angular.element(
+        beforeEach(inject(function ($compile: ICompileService, $q: IQService, NgTableParams: ITableParamsConstructor<IPerson>) {
+            elm = ng1.element(
                 '<div>' +
                 '<table ng-table-dynamic="tableParams with cols">' +
                 '<tr ng-repeat="user in $data">' +
@@ -692,7 +694,7 @@ describe('ng-table-dynamic', () => {
         it('html table columns should reflect order of columns in replacement array', () => {
             expect(getTitles()).toEqual(['Name', 'Age', 'Money']);
 
-            var newArray = scope.cols.map(angular.identity);
+            var newArray = scope.cols.map(ng1.identity);
             newArray.reverse();
             scope.cols = newArray;
             scope.$digest();
