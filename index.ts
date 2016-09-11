@@ -1,3 +1,5 @@
+/// <reference path="typings/index.d.ts" />
+
 import * as ng1 from 'angular';
 import coreModule from './src/core';
 import browserModule from './src/browser';
