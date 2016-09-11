@@ -18,7 +18,7 @@
     "server": "node ../../node_modules/http-server/bin/http-server build -c-1 -o",
     "start": "node ../../node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --env.debug",
     "stats": "node ../../node_modules/webpack/bin/webpack.js --env.prod --profile --json > build-stats.json",
-    "tsc": "tsc",
+    "tsc": "node ../../node_modules/typescript/lib/typescript.js",
     "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm install --production",
     "validate": "node ../../node_modules/webpack-validator/dist/bin/webpack-validator.js webpack.config.js"
   },
@@ -28,7 +28,5 @@
     "bootstrap-css-only": "^3.3.6",
     "ng-table": "^1.0.0"
   },
-  "devDependencies": {
-    "typescript": "2.0.0"
-  }
+  "devDependencies": {}
 }
