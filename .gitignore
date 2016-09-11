@@ -1,7 +1,6 @@
 .temp
 .idea
 node_modules
-bower_components
 out
 typings
 npm-debug.*

@@ -1,7 +1,6 @@
 .vscode
 .idea
 .temp
-bower_components
 demo-site
 docs
 examples-old
@@ -9,7 +8,6 @@ out
 src
 test
 typings
-.bowerrc
 .editorconfig
 .jshintrc
 .travis.yml

@@ -35,11 +35,6 @@ It's recommended to upgrade in three jumps:
 
 ## Installing
 
-**Bower**
-```
-bower install ng-table --save
-```
-
 **NPM**
 ```
 npm install ng-table --save
