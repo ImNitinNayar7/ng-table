@@ -1,19 +1,12 @@
 import { browser, element, by } from 'protractor/globals';
 
-describe('angularjs homepage todo list', () => {
-    it('should add a todo', () => {
-        browser.get('https://angularjs.org');
+describe('ng-table - ts+webpack', () => {
+    it('should render ng-table', () => {
+        browser.get('http://localhost:8080');
 
-        element(by.model('todoList.todoText')).sendKeys('write first protractor test');
-        element(by.css('[value="add"]')).click();
-
-        var todoList = element.all(by.repeater('todo in todoList.todos'));
-        expect(todoList.count()).toEqual(3);
-        expect(todoList.get(2).getText()).toEqual('write first protractor test');
-
-        // You wrote your first test, cross it off the list
-        todoList.get(2).element(by.css('input')).click();
-        var completedAmount = element.all(by.css('.done-true'));
-        expect(completedAmount.count()).toEqual(2);
+        const table = element(by.css('table[ng-table]'));
+        expect(table.isPresent()).toBe(true);
+        const dataRows = element.all(by.repeater('user in $data'));
+        expect(dataRows.count()).toBeGreaterThan(0);
     });
 });
