@@ -9,6 +9,9 @@ index.d.ts
 src/**/*.js
 src/**/*.js.map
 src/**/*.d.ts
+e2e/**/*.js
+e2e/**/*.js.map
+e2e/**/*.d.ts
 test/**/*.d.ts
 demo-apps/ts-webpack/src/**/*.js
 demo-apps/ts-webpack/src/**/*.js.map
@@ -17,6 +20,7 @@ demo-apps/ts-webpack/src/**/*.d.ts
 !demo-apps/es6-systemjs/index.js
 test/*.js
 !test/index.js
+!test/index.d.ts
 # redundant webpack build artifacts produced by ExtractTextPlugin
 dist/styles.*
 build
