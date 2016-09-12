@@ -1,22 +1,18 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "es6",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": false,
-    "declaration": true,
+    "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true
   },
   "include": [
-    "e2e/**/*",
-    "src/**/*",
-    "test/**/*",
-    "./*"
+    "./**/*"
   ],
   "exclude": ["node_modules"]
 }
