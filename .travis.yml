@@ -7,7 +7,7 @@ before_install:
 
 install:
   - npm prune && npm install
-  - npm install:demo-apps && npm run setup:demo-apps
+  - npm run install:demo-apps && npm run setup:demo-apps
   - npm run build:all
 
 script:
