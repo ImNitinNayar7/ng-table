@@ -12,6 +12,7 @@
     "@types/angular-mocks": "^1.5.4",
     "@types/jasmine": "^2.2.33",
     "@types/karma-jasmine": "0.0.27",
+    "@types/lodash": "^4.14.34",
     "angular": "^1.5.8",
     "angular-mocks": "^1.5.8",
     "awesome-typescript-loader": "2.1.1",
