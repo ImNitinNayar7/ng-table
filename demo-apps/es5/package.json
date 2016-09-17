@@ -8,6 +8,7 @@
   "scripts": {
     "_linklocal": "node ../../node_modules/linklocal/bin/linklocal.js",
     "build:lib": "cd ../../ && npm run build",
+    "build": "echo \"Nothing to build\"",
     "linklocal": "npm run _linklocal -- --named ng-table ../../../",
     "server": "node ../../node_modules/http-server/bin/http-server -c-1 -o",
     "setup:local": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel build:lib linklocal",

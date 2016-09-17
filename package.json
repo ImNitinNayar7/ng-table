@@ -16,6 +16,7 @@
     "angular": "^1.5.8",
     "angular-mocks": "^1.5.8",
     "awesome-typescript-loader": "2.1.1",
+    "bulk": "github:kumarharsh/bulk#windows-support",
     "coveralls": "~2.11.0",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^2.0.0-beta.3",
@@ -57,7 +58,10 @@
     "webpack-validator": "^2.2.7"
   },
   "scripts": {
-    "build:demo-apps": "cd demo-apps/es6-webpack && npm install && npm run setup:local",
+    "build:all": "npm-run-all --parallel build tsc --serial build:demo-apps",
+    "build:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm run build\"",
+    "install:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm install\"",
+    "setup:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm run linklocal\"",
     "build": "webpack --progress --profile --env.debug",
     "build:prod": "webpack  --progress --profile --env.prod",
     "build:full": "webpack  --progress --profile --env.prod --env.debug",
