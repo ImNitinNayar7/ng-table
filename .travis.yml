@@ -8,6 +8,7 @@ before_install:
 install:
   - npm prune && npm install
   - npm run build
+  - npm run build:demo-apps
 
 script:
   - npm test
