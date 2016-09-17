@@ -1,12 +1,40 @@
-import { browser, element, by } from 'protractor/globals';
+import { DemoNgTablePage } from './demo-ng-table.po';
 
-describe('ng-table - ts+webpack', () => {
-    it('should render ng-table', () => {
-        browser.get('http://localhost:8080');
+describe('ng-table', () => {
 
-        const table = element(by.css('table[ng-table]'));
-        expect(table.isPresent()).toBe(true);
-        const dataRows = element.all(by.repeater('user in $data'));
-        expect(dataRows.count()).toBeGreaterThan(0);
+    describe('es5', () => {
+        const demoPageUrl = 'es5/index.html';
+        it('should render ng-table', () => {
+            renderTableSpec(demoPageUrl);
+        });
     });
+
+    describe('es6-systemjs', () => {
+        const demoPageUrl = 'es6-systemjs/index.html';
+        it('should render ng-table', () => {
+            renderTableSpec(demoPageUrl);
+        });
+    });
+
+    describe('es6-webpack', () => {
+        const demoPageUrl = 'es6-webpack/build/index.html';
+        it('should render ng-table', () => {
+            renderTableSpec(demoPageUrl);
+        });
+    });
+
+    describe('ts-webpack', () => {
+        const demoPageUrl = 'ts-webpack/build/index.html';
+        it('should render ng-table', () => {
+            renderTableSpec(demoPageUrl);
+        });
+    });
+
+
+    function renderTableSpec(url: string) {
+        const demoPage = new DemoNgTablePage(url);
+        demoPage.open();
+        expect(demoPage.table.isPresent()).toBe(true);
+        expect(demoPage.dataRows.count()).toBeGreaterThan(0);
+    }
 });
