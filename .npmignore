@@ -1,6 +1,7 @@
 .vscode
 .idea
 .temp
+demo-apps
 demo-site
 docs
 examples-old
@@ -9,9 +10,8 @@ src
 test
 typings
 .editorconfig
-.jshintrc
 .travis.yml
 *.json
 *.js
 !/dist/*.js
-DeleteNodeModules.bat
+npm-shrinkwrap.json
