@@ -1,7 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const partsFactory = require('./webpack/libParts');
-const multiConfig = require('./webpack/multiConfig')(partsFactory);
+const partsFactory = require('./scripts/webpack/libParts');
+const multiConfig = require('./scripts/webpack/multiConfig')(partsFactory);
 
 module.exports = (env = { prod: false, debug: false }) => {
     return multiConfig(__dirname, env, createConfig);

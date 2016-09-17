@@ -3,7 +3,7 @@ const merge = require('webpack-merge');
 
 module.exports = (env = { prod: false, debug: false, port: 8080, host: 'localhost' }) => {
 
-    const parts = require('../../webpack/appParts')(__dirname, env);
+    const parts = require('../../scripts/webpack/appParts')(__dirname, env);
 
     const vendorStyles = {
         entry: {

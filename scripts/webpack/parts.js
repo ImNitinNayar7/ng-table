@@ -100,7 +100,7 @@ function createParts(rootDir, env) {
     }
 
     function typescript(tsconfig = 'tsconfig.json') {
-        const tsconfigPath = path.resolve('..', rootDir, tsconfig)
+        const tsconfigPath = path.resolve(rootDir, tsconfig)
         return {
             // Currently we need to add '.ts' to the resolve.extensions array.
             resolve: {
