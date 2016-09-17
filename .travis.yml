@@ -4,7 +4,6 @@ node_js:
 
 before_install:
   - npm install -g karma-cli
-  - npm install -g grunt-cli
 
 install:
   - npm prune && npm install
@@ -19,4 +18,3 @@ after_success:
 cache:
   directories:
     - node_modules
-  
