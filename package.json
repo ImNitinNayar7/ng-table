@@ -57,6 +57,7 @@
     "webpack-validator": "^2.2.7"
   },
   "scripts": {
+    "build:demo-apps": "cd demo-apps/es6-webpack && npm install && npm run setup:local",
     "build": "webpack --progress --profile --env.debug",
     "build:prod": "webpack  --progress --profile --env.prod",
     "build:full": "webpack  --progress --profile --env.prod --env.debug",
