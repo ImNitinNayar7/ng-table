@@ -1,9 +1,9 @@
 {
-  "name": "ng-table-demo-app-es6-systemjs",
+  "name": "ng-table-demo-app-es6-webpack",
   "version": "1.0.0",
   "author": "Vitalii Savchuk <esvit666@gmail.com>",
   "license": "BSD",
-  "description": "ng-table example app; app written in es2015; systemjs to load scripts",
+  "description": "ng-table example app; app written in es2015; webpack to load scripts",
   "private": true,
   "scripts": {
     "_linklocal": "node ../../node_modules/linklocal/bin/linklocal.js",
@@ -16,6 +16,9 @@
     "linklocal": "npm run _linklocal -- --named ng-table ../../../",
     "setup:local": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel build:lib linklocal",
     "server": "node ../../node_modules/http-server/bin/http-server build -c-1 -o",
+    "shrinkwrap:remove": "del npm-shrinkwrap.json",
+    "preshrinkwrap": "npm run shrinkwrap:remove && npm run unlinklocal",
+    "postshrinkwrap": "npm run linklocal",
     "start": "node ../../node_modules/webpack-dev-server/bin/webpack-dev-server.js --env.debug",
     "stats": "node ../../node_modules/webpack/bin/webpack.js --env.prod --profile --json > build-stats.json",
     "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm install --production",
@@ -32,6 +35,7 @@
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-es2016": "^6.11.3",
-    "babel-preset-stage-2": "^6.13.0"
+    "babel-preset-stage-2": "^6.13.0",
+    "webpack": "^2.1.0-beta.22"
   }
 }

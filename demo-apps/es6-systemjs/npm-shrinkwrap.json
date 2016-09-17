@@ -1,0 +1,36 @@
+{
+  "name": "ng-table-demo-app-es6-systemjs",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": {
+      "version": "1.5.8",
+      "from": "angular@1.5.8",
+      "resolved": "https://registry.npmjs.org/angular/-/angular-1.5.8.tgz"
+    },
+    "bootstrap": {
+      "version": "3.3.7",
+      "from": "bootstrap@3.3.7",
+      "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-3.3.7.tgz"
+    },
+    "ng-table": {
+      "version": "1.0.0",
+      "from": "ng-table@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/ng-table/-/ng-table-1.0.0.tgz"
+    },
+    "systemjs": {
+      "version": "0.19.36",
+      "from": "systemjs@0.19.36",
+      "resolved": "https://registry.npmjs.org/systemjs/-/systemjs-0.19.36.tgz"
+    },
+    "systemjs-plugin-babel": {
+      "version": "0.0.15",
+      "from": "systemjs-plugin-babel@0.0.15",
+      "resolved": "https://registry.npmjs.org/systemjs-plugin-babel/-/systemjs-plugin-babel-0.0.15.tgz"
+    },
+    "when": {
+      "version": "3.7.7",
+      "from": "when@>=3.7.5 <4.0.0",
+      "resolved": "https://registry.npmjs.org/when/-/when-3.7.7.tgz"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "ng-table-demo-app-ts-webpack",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": {
+      "version": "1.5.8",
+      "from": "angular@1.5.8",
+      "resolved": "https://registry.npmjs.org/angular/-/angular-1.5.8.tgz"
+    },
+    "bootstrap-css-only": {
+      "version": "3.3.6",
+      "from": "bootstrap-css-only@>=3.3.6 <4.0.0",
+      "resolved": "https://registry.npmjs.org/bootstrap-css-only/-/bootstrap-css-only-3.3.6.tgz"
+    },
+    "ng-table": {
+      "version": "1.0.0",
+      "from": "ng-table@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/ng-table/-/ng-table-1.0.0.tgz"
+    }
+  }
+}

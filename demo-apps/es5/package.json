@@ -9,9 +9,13 @@
     "_linklocal": "node ../../node_modules/linklocal/bin/linklocal.js",
     "build:lib": "cd ../../ && npm run build",
     "build": "echo \"Nothing to build\"",
+    "clean": "echo \"Nothing to clean\"",
     "linklocal": "npm run _linklocal -- --named ng-table ../../../",
     "server": "node ../../node_modules/http-server/bin/http-server -c-1 -o",
     "setup:local": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel build:lib linklocal",
+    "shrinkwrap:remove": "del npm-shrinkwrap.json",
+    "preshrinkwrap": "npm run shrinkwrap:remove && npm run unlinklocal",
+    "postshrinkwrap": "npm run linklocal",
     "start": "npm run server",
     "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm install --production"
   },
