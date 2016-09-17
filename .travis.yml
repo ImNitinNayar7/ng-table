@@ -8,7 +8,7 @@ before_install:
 install:
   - npm prune && npm install
   - npm run build
-  - npm run build:demo-apps
+  - cd demo-apps/es6-webpack && npm install && npm run build
 
 script:
   - npm test

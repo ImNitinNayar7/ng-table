@@ -58,7 +58,6 @@
   },
   "scripts": {
     "build": "webpack --progress --profile --env.debug",
-    "build:demo-apps": "cd demo-apps/es6-webpack && npm install && npm run build",
     "build:prod": "webpack  --progress --profile --env.prod",
     "build:full": "webpack  --progress --profile --env.prod --env.debug",
     "clean": "shx rm -f index.d.ts src/browser/*.js src/browser/*.js.map src/browser/*.d.ts src/core/*.js src/core/*.js.map src/core/*.d.ts test/*.spec.js test/*.spec.js.map test/*.spec.d.ts demo-apps/ts-webpack/src/**/*.js demo-apps/ts-webpack/src/**/*.js.map",
