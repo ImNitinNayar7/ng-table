@@ -4,6 +4,10 @@ node_js:
 
 addons:
   sauce_connect: true
+env:
+  global:
+  - secure: IegPyce71WauW7bk+31OGODk8qn1U0srF/pBs4GcVFtC3QLRk/D5T2D/7ZCCrsNfFAtHmw8AZhCYiItt3qPEcsQUQIZg/KcfLmV3i4sEShxjx4caK2wLyeGq3hTol+JafUES94QfyezKmpK9C0A17osomYmo7In+bHvxjZwjNLU=
+  - secure: VaE4Q7fHi5t6gFYek5hYcveesBkImrs+m0kDE224dMlqoK9Ixhv0Raybx8HGafKtKjOM5fIYHbGENPWK3z8eRZtQhSyIc2rEpy7iYRcf8NF1djD7mxCymsFo7cx7OJmBlqDPsQII/VZfOg30tORoBv+9WQ6pAuggMQM8bCFdsUY=
 
 before_install:
 - npm install -g karma-cli
@@ -14,19 +18,15 @@ install:
 
 before_script:
 - npm run build:all
-- npm run e2e-server
+- '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run e2e-server || true'
 
 
 script:
 - npm test
-- npm run e2e:ci
+- '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run e2e:ci || true'
 
 after_success: cat out/coverage/*/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 cache:
   directories:
   - node_modules
-env:
-  global:
-  - secure: IegPyce71WauW7bk+31OGODk8qn1U0srF/pBs4GcVFtC3QLRk/D5T2D/7ZCCrsNfFAtHmw8AZhCYiItt3qPEcsQUQIZg/KcfLmV3i4sEShxjx4caK2wLyeGq3hTol+JafUES94QfyezKmpK9C0A17osomYmo7In+bHvxjZwjNLU=
-  - secure: VaE4Q7fHi5t6gFYek5hYcveesBkImrs+m0kDE224dMlqoK9Ixhv0Raybx8HGafKtKjOM5fIYHbGENPWK3z8eRZtQhSyIc2rEpy7iYRcf8NF1djD7mxCymsFo7cx7OJmBlqDPsQII/VZfOg30tORoBv+9WQ6pAuggMQM8bCFdsUY=
