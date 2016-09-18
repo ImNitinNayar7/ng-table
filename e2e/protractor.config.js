@@ -1,0 +1,68 @@
+var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
+
+var reporter = new HtmlScreenshotReporter({
+    cleanDestination: true,
+    dest: './out/test/end2end/reports',
+    filename: 'e2e.html',
+    ignoreSkippedSpecs: true,
+    showSummary: true,
+
+    // reportOnlyFailedSpecs: true,   
+    // captureOnlyFailedSpecs: true
+});
+
+const config = {
+
+    allScriptsTimeout: 11000,
+
+    specs: [
+        '*.spec.ts'
+    ],
+
+    capabilities: {
+        'browserName': 'chrome'
+    },
+
+    baseUrl: 'http://localhost:8080/',
+
+    framework: 'jasmine',
+
+    jasmineNodeOpts: {
+        defaultTimeoutInterval: 30000,
+        showColors: true,
+        includeStackTrace: true
+    },
+
+    beforeLaunch: function () {
+        require('ts-node').register({
+            project: 'e2e'
+        });
+        // Setup the report before any tests start
+        return new Promise(function (resolve) {
+            reporter.beforeLaunch(resolve);
+        });
+    },
+
+    onPrepare: function () {
+        jasmine.getEnv().addReporter(reporter);
+    },
+
+    afterLaunch: function (exitCode) {
+        // Close the report after all tests finish
+        return new Promise(function (resolve) {
+            reporter.afterLaunch(resolve.bind(this, exitCode));
+        });
+    }
+};
+
+if (process.env.TRAVIS) {
+  config.sauceUser = process.env.SAUCE_USERNAME;
+  config.sauceKey = process.env.SAUCE_ACCESS_KEY;
+  config.capabilities = {
+    'browserName': 'chrome',
+    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+    'build': process.env.TRAVIS_BUILD_NUMBER
+  };
+}
+
+exports.config = config
