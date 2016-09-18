@@ -2133,6 +2133,11 @@
       "from": "jasmine-core@>=2.3.4 <3.0.0",
       "resolved": "https://registry.npmjs.org/jasmine-core/-/jasmine-core-2.5.2.tgz"
     },
+    "jasmine-spec-reporter": {
+      "version": "2.7.0",
+      "from": "jasmine-spec-reporter@latest",
+      "resolved": "https://registry.npmjs.org/jasmine-spec-reporter/-/jasmine-spec-reporter-2.7.0.tgz"
+    },
     "jasminewd2": {
       "version": "0.0.10",
       "from": "jasminewd2@0.0.10",
