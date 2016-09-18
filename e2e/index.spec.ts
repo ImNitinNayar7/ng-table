@@ -7,6 +7,12 @@ describe('ng-table', () => {
         it('should render ng-table', () => {
             renderTableSpec(demoPageUrl);
         });
+
+        it('should fail', () => {
+            const demoPage = new DemoNgTablePage(demoPageUrl);
+            demoPage.open();
+            expect(demoPage.table.isPresent()).toBe(false);
+        })
     });
 
     describe('es6-systemjs', () => {
