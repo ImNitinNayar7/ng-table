@@ -69,6 +69,7 @@
     "doc": "typedoc --options typedoc.json index.ts",
     "e2e-server": "http-server demo-apps -c-1",
     "e2e": "protractor e2e/protractor.config.js",
+    "e2e:ci": "protractor e2e/protractor.config.js",
     "poste2e": "node ./scripts/open-e2e-report",
     "install:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm install\"",
     "setup:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm run linklocal\"",
