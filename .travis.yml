@@ -19,7 +19,7 @@ install:
 
 before_script:
 - npm run build:all
-- '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run e2e-server || true'
+- '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run e2e-server:ci || true'
 
 script:
 - npm test
