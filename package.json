@@ -69,7 +69,7 @@
     "predoc": "shx rm -rf docs",
     "doc": "typedoc --options typedoc.json index.ts",
     "e2e-server": "http-server demo-apps -c-1",
-    "e2e-server:ci": "http-server demo-apps -c-1 &",
+    "e2e-server:ci": "http-server demo-apps -s -c-1 &",
     "e2e": "protractor e2e/protractor.config.js",
     "e2e:ci": "protractor e2e/protractor-travis.config",
     "poste2e": "node ./scripts/open-e2e-report",
