@@ -19,11 +19,11 @@ install:
 
 before_script:
 - npm run build:all
-- '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run e2e-server:ci || true'
+- '[ "${TRAVIS_PULL_REQUEST}" = "true" ] || npm run e2e-server:ci'
 
 script:
 - npm test
-- '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && npm run e2e:ci || true'
+- '[ "${TRAVIS_PULL_REQUEST}" = "true" ] || npm run e2e:ci'
 
 after_success: cat out/coverage/*/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
