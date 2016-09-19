@@ -45,11 +45,35 @@ exports.config = {
             'platform': 'Windows 8.1',
             'version': '11.0'
         }),
+        // capabilitiesForSauceLabs({
+        //     'name': 'Win10/Edge',
+        //     'browserName': 'edge',
+        //     'platform': 'Windows 10',
+        //     'version': '13.10586'
+        // }),
         capabilitiesForSauceLabs({
-            'name': 'Win10/Edge',
-            'browserName': 'edge',
-            'platform': 'Windows 10',
-            'version': '13.10586'
+            'name': 'Mac/Safari 6',
+            'browserName': 'safari',
+            'platform': 'OS X 10.8',
+            'version': '6'
+        }),
+        capabilitiesForSauceLabs({
+            'name': 'Mac/Safari 7',
+            'browserName': 'safari',
+            'platform': 'OS X 10.9',
+            'version': '7'
+        }),
+        capabilitiesForSauceLabs({
+            'name': 'Mac/Safari 8',
+            'browserName': 'safari',
+            'platform': 'OS X 10.10',
+            'version': '8'
+        }),
+        capabilitiesForSauceLabs({
+            'name': 'Mac/Safari 9',
+            'browserName': 'safari',
+            'platform': 'OS X 10.11',
+            'version': '9'
         })
         
     ],
