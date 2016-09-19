@@ -55,11 +55,8 @@ We use Karma to ensure the quality of the code. The easiest way to run these che
 
 ```sh
 npm install
-npm run build
 npm test
 ```
-
-The karma task will try to open Firefox and Chrome as browser in which to run the tests. Make sure this is available or change the configuration in `karma.conf.js`
 
 
 ## Configuring ng-table

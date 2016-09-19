@@ -13,11 +13,11 @@ exports.config = {
             'name': 'Linux/Chrome',
             'browserName': 'chrome'
         })
-        // ,
-        // capabilitiesForSauceLabs({
-        //     'name': 'Linux/Firefox',
-        //     'browserName': 'firefox'
-        // })
+        ,
+        capabilitiesForSauceLabs({
+            'name': 'Linux/Firefox',
+            'browserName': 'firefox'
+        })
         // ,
         // capabilitiesForSauceLabs({
         //     'name': 'Win7/Firefox',
@@ -89,14 +89,11 @@ exports.config = {
         includeStackTrace: true
     },
 
-    beforeLaunch: function () {
+    onPrepare: function () {
+        jasmine.getEnv().addReporter(new SpecReporter());
         require('ts-node').register({
             project: 'e2e'
         });
-    },
-
-    onPrepare: function () {
-        jasmine.getEnv().addReporter(new SpecReporter());
     },
 
     sauceUser: process.env.SAUCE_USERNAME,
