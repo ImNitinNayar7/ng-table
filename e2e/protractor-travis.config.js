@@ -16,66 +16,66 @@ exports.config = {
         capabilitiesForSauceLabs({
             'name': 'Linux/Firefox',
             'browserName': 'firefox'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Win7/Firefox',
-            'browserName': 'firefox',
-            'platform': 'Windows 7'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Win7/Chrome',
-            'browserName': 'chrome',
-            'platform': 'Windows 7'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Win7/IE9',
-            'browserName': 'internet explorer',
-            'platform': 'Windows 7',
-            'version': '9.0'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Win8/IE10',
-            'browserName': 'internet explorer',
-            'platform': 'Windows 8',
-            'version': '10.0'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Win8.1/IE11',
-            'browserName': 'internet explorer',
-            'platform': 'Windows 8.1',
-            'version': '11.0'
-        }),
+        })
+        // ,
+        // capabilitiesForSauceLabs({
+        //     'name': 'Win7/Firefox',
+        //     'browserName': 'firefox',
+        //     'platform': 'Windows 7'
+        // }),
+        // capabilitiesForSauceLabs({
+        //     'name': 'Win7/Chrome',
+        //     'browserName': 'chrome',
+        //     'platform': 'Windows 7'
+        // }),
+        // capabilitiesForSauceLabs({
+        //     'name': 'Win7/IE9',
+        //     'browserName': 'internet explorer',
+        //     'platform': 'Windows 7',
+        //     'version': '9.0'
+        // }),
+        // capabilitiesForSauceLabs({
+        //     'name': 'Win8/IE10',
+        //     'browserName': 'internet explorer',
+        //     'platform': 'Windows 8',
+        //     'version': '10.0'
+        // }),
+        // capabilitiesForSauceLabs({
+        //     'name': 'Win8.1/IE11',
+        //     'browserName': 'internet explorer',
+        //     'platform': 'Windows 8.1',
+        //     'version': '11.0'
+        // }),
         // capabilitiesForSauceLabs({
         //     'name': 'Win10/Edge',
         //     'browserName': 'edge',
         //     'platform': 'Windows 10',
         //     'version': '13.10586'
         // }),
-        capabilitiesForSauceLabs({
-            'name': 'Mac/Safari 6',
-            'browserName': 'safari',
-            'platform': 'OS X 10.8',
-            'version': '6'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Mac/Safari 7',
-            'browserName': 'safari',
-            'platform': 'OS X 10.9',
-            'version': '7'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Mac/Safari 8',
-            'browserName': 'safari',
-            'platform': 'OS X 10.10',
-            'version': '8'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Mac/Safari 9',
-            'browserName': 'safari',
-            'platform': 'OS X 10.11',
-            'version': '9'
-        })
-        
+        // capabilitiesForSauceLabs({
+        //     'name': 'Mac/Safari 6',
+        //     'browserName': 'safari',
+        //     'platform': 'OS X 10.8',
+        //     'version': '6'
+        // }),
+        // capabilitiesForSauceLabs({
+        //     'name': 'Mac/Safari 7',
+        //     'browserName': 'safari',
+        //     'platform': 'OS X 10.9',
+        //     'version': '7'
+        // }),
+        // capabilitiesForSauceLabs({
+        //     'name': 'Mac/Safari 8',
+        //     'browserName': 'safari',
+        //     'platform': 'OS X 10.10',
+        //     'version': '8'
+        // }),
+        // capabilitiesForSauceLabs({
+        //     'name': 'Mac/Safari 9',
+        //     'browserName': 'safari',
+        //     'platform': 'OS X 10.11',
+        //     'version': '9'
+        // })
     ],
 
     baseUrl: 'http://localhost:8080/',
