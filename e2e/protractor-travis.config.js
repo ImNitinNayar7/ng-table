@@ -12,11 +12,12 @@ exports.config = {
         capabilitiesForSauceLabs({
             'name': 'Linux/Chrome',
             'browserName': 'chrome'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Linux/Firefox',
-            'browserName': 'firefox'
         })
+        // ,
+        // capabilitiesForSauceLabs({
+        //     'name': 'Linux/Firefox',
+        //     'browserName': 'firefox'
+        // })
         // ,
         // capabilitiesForSauceLabs({
         //     'name': 'Win7/Firefox',
