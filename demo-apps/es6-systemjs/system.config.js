@@ -20,8 +20,9 @@
         meta: {
             '*.js': {
                 babelOptions: {
-                    // chrome supports es2015 so do NOT need to transpile code to ecmascript5
-                    es2015: false
+                    // although chrome supports es2015 we're running this sample app in Safari so we
+                    // need to transpile code to ecmascript5
+                    es2015: true
                 }
             }
         }
