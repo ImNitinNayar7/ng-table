@@ -23,6 +23,7 @@
   "dependencies": {
     "angular": "1.5.8",
     "bootstrap": "3.3.7",
+    "core-js": "^2.4.1",
     "ng-table": "^1.0.0",
     "systemjs": "0.19.36",
     "systemjs-plugin-babel": "0.0.15"
