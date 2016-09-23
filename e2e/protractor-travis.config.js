@@ -33,19 +33,19 @@ exports.config = {
             'name': 'Win7/IE9',
             'browserName': 'internet explorer',
             'platform': 'Windows 7',
-            'version': '9.0'
+            'version': 9
         }),
         capabilitiesForSauceLabs({
             'name': 'Win8/IE10',
             'browserName': 'internet explorer',
             'platform': 'Windows 8',
-            'version': '10.0'
+            'version': 10
         }),
         capabilitiesForSauceLabs({
             'name': 'Win8.1/IE11',
             'browserName': 'internet explorer',
             'platform': 'Windows 8.1',
-            'version': '11.0'
+            'version': 11
         }),
         // capabilitiesForSauceLabs({
         //     'name': 'Win10/Edge',
@@ -54,28 +54,16 @@ exports.config = {
         //     'version': '13.10586'
         // }),
         capabilitiesForSauceLabs({
-            'name': 'Mac/Safari 6',
-            'browserName': 'safari',
-            'platform': 'OS X 10.8',
-            'version': '6'
-        }),
-        capabilitiesForSauceLabs({
-            'name': 'Mac/Safari 7',
-            'browserName': 'safari',
-            'platform': 'OS X 10.9',
-            'version': '7'
-        }),
-        capabilitiesForSauceLabs({
             'name': 'Mac/Safari 8',
             'browserName': 'safari',
             'platform': 'OS X 10.10',
-            'version': '8'
+            'version': 8
         }),
         capabilitiesForSauceLabs({
             'name': 'Mac/Safari 9',
             'browserName': 'safari',
             'platform': 'OS X 10.11',
-            'version': '9'
+            'version': 9
         })
     ],
 
@@ -93,6 +81,9 @@ exports.config = {
         jasmine.getEnv().addReporter(new SpecReporter());
         require('ts-node').register({
             project: 'e2e'
+        });
+        return browser.getProcessedConfig().then(function (config) {
+            global.capabilities = config.capabilities;
         });
     },
 

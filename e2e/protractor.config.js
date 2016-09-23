@@ -45,6 +45,10 @@ exports.config = {
 
     onPrepare: function () {
         jasmine.getEnv().addReporter(reporter);
+
+        return browser.getProcessedConfig().then(function (config) {
+            global.capabilities = config.capabilities;
+        });
     },
 
     afterLaunch: function (exitCode) {
