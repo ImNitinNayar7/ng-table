@@ -43,7 +43,7 @@
     "npm-run-all": "^2.3.0",
     "open": "0.0.5",
     "phantomjs-prebuilt": "2.1.10",
-    "protractor": "^4.0.5",
+    "protractor": "^4.0.9",
     "protractor-jasmine2-screenshot-reporter": "^0.3.2",
     "resolve-url-loader": "^1.6.0",
     "sass-loader": "^4.0.0",

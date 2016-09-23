@@ -33,14 +33,19 @@
       "resolved": "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.34.tgz"
     },
     "@types/node": {
-      "version": "6.0.38",
+      "version": "6.0.41",
       "from": "@types/node@>=6.0.35 <7.0.0",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-6.0.38.tgz"
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-6.0.41.tgz"
     },
     "@types/q": {
       "version": "0.0.30",
       "from": "@types/q@>=0.0.30 <0.0.31",
       "resolved": "https://registry.npmjs.org/@types/q/-/q-0.0.30.tgz"
+    },
+    "@types/selenium-webdriver": {
+      "version": "2.53.30",
+      "from": "@types/selenium-webdriver@>=2.53.30 <2.54.0",
+      "resolved": "https://registry.npmjs.org/@types/selenium-webdriver/-/selenium-webdriver-2.53.30.tgz"
     },
     "abbrev": {
       "version": "1.0.9",
@@ -1562,9 +1567,9 @@
       "resolved": "https://registry.npmjs.org/globby/-/globby-5.0.0.tgz",
       "dependencies": {
         "glob": {
-          "version": "7.0.6",
-          "from": "glob@>=7.0.3 <8.0.0",
-          "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.6.tgz"
+          "version": "7.1.0",
+          "from": "glob@^7.0.3",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.0.tgz"
         }
       }
     },
@@ -2107,24 +2112,14 @@
       "resolved": "https://registry.npmjs.org/items/-/items-2.1.1.tgz"
     },
     "jasmine": {
-      "version": "2.4.1",
-      "from": "jasmine@2.4.1",
-      "resolved": "https://registry.npmjs.org/jasmine/-/jasmine-2.4.1.tgz",
+      "version": "2.5.2",
+      "from": "jasmine@2.5.2",
+      "resolved": "https://registry.npmjs.org/jasmine/-/jasmine-2.5.2.tgz",
       "dependencies": {
         "glob": {
-          "version": "3.2.11",
-          "from": "glob@>=3.2.11 <4.0.0",
-          "resolved": "https://registry.npmjs.org/glob/-/glob-3.2.11.tgz"
-        },
-        "jasmine-core": {
-          "version": "2.4.1",
-          "from": "jasmine-core@>=2.4.0 <2.5.0",
-          "resolved": "https://registry.npmjs.org/jasmine-core/-/jasmine-core-2.4.1.tgz"
-        },
-        "minimatch": {
-          "version": "0.3.0",
-          "from": "minimatch@>=0.3.0 <0.4.0",
-          "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-0.3.0.tgz"
+          "version": "7.1.0",
+          "from": "glob@^7.0.6",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.0.tgz"
         }
       }
     },
@@ -4018,14 +4013,14 @@
       "resolved": "https://registry.npmjs.org/progress/-/progress-1.1.8.tgz"
     },
     "protractor": {
-      "version": "4.0.8",
+      "version": "4.0.9",
       "from": "protractor@>=4.0.5 <5.0.0",
-      "resolved": "https://registry.npmjs.org/protractor/-/protractor-4.0.8.tgz",
+      "resolved": "https://registry.npmjs.org/protractor/-/protractor-4.0.9.tgz",
       "dependencies": {
         "glob": {
-          "version": "7.0.6",
+          "version": "7.1.0",
           "from": "glob@>=7.0.3 <8.0.0",
-          "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.6.tgz"
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.0.tgz"
         },
         "webdriver-manager": {
           "version": "10.2.3",
@@ -4473,11 +4468,6 @@
       "version": "0.1.4",
       "from": "shx@>=0.1.4 <0.2.0",
       "resolved": "https://registry.npmjs.org/shx/-/shx-0.1.4.tgz"
-    },
-    "sigmund": {
-      "version": "1.0.1",
-      "from": "sigmund@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/sigmund/-/sigmund-1.0.1.tgz"
     },
     "signal-exit": {
       "version": "3.0.1",

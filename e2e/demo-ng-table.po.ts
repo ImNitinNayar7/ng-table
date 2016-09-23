@@ -1,5 +1,4 @@
-import { ElementArrayFinder, ElementFinder } from 'protractor';
-import { browser, by, element } from 'protractor/globals';
+import { browser, by, element, ElementArrayFinder, ElementFinder } from 'protractor';
 
 export class DemoNgTablePage {
     dataRows: ElementArrayFinder;
