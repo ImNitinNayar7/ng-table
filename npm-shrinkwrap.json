@@ -343,15 +343,15 @@
       "dev": true
     },
     "awesome-typescript-loader": {
-      "version": "2.1.1",
-      "from": "awesome-typescript-loader@2.1.1",
-      "resolved": "https://registry.npmjs.org/awesome-typescript-loader/-/awesome-typescript-loader-2.1.1.tgz",
+      "version": "2.2.4",
+      "from": "awesome-typescript-loader@2.2.4",
+      "resolved": "https://registry.npmjs.org/awesome-typescript-loader/-/awesome-typescript-loader-2.2.4.tgz",
       "dev": true,
       "dependencies": {
         "lodash": {
-          "version": "4.15.0",
+          "version": "4.16.1",
           "from": "lodash@>=4.13.1 <5.0.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.16.1.tgz",
           "dev": true
         }
       }
@@ -5798,9 +5798,9 @@
       "dev": true
     },
     "typescript": {
-      "version": "2.0.0",
-      "from": "typescript@2.0.0",
-      "resolved": "https://registry.npmjs.org/typescript/-/typescript-2.0.0.tgz",
+      "version": "2.0.3",
+      "from": "typescript@2.0.3",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-2.0.3.tgz",
       "dev": true
     },
     "uglify-js": {
