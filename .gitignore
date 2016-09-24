@@ -2,7 +2,6 @@
 .idea
 node_modules
 out
-typings
 npm-debug.*
 index.js
 index.d.ts
@@ -24,7 +23,7 @@ test/*.js
 !test/index.js
 !test/index.d.ts
 # redundant webpack build artifacts produced by ExtractTextPlugin
-dist/styles.*
+bundles
 build
 build-stats.json
 docs

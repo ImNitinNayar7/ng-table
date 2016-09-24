@@ -8,7 +8,7 @@
     };
 
     var packages = {
-        'ng-table': { main: '/dist/ng-table.js', defaultExtension: 'js' },
+        'ng-table': { main: '/bundles/ng-table.js', defaultExtension: 'js' },
         'src': { defaultExtension: 'js' },
         'angular': { main: 'index.js', defaultExtension: 'js' }
     };

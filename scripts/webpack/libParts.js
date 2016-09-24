@@ -31,7 +31,7 @@ function createLibraryParts(rootDir, env = {}) {
             // tells webpack not to include in bundle require'd node specific objects (eg path)
             target: 'node',
             output: {
-                path: path.join(rootDir, 'dist'),
+                path: path.join(rootDir, 'bundles'),
                 filename: filename,
                 library: libraryName,
                 libraryTarget: 'umd',

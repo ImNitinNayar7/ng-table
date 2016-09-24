@@ -7,7 +7,9 @@
     "type": "git",
     "url": "git://github.com/esvit/ng-table.git"
   },
-  "main": "index.js",
+  "main": "bundles/ng-table.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
   "devDependencies": {
     "@types/angular-mocks": "^1.5.4",
     "@types/jasmine": "^2.2.33",
@@ -68,6 +70,8 @@
     "clean": "shx rm -f index.d.ts src/browser/*.js src/browser/*.js.map src/browser/*.d.ts src/core/*.js src/core/*.js.map src/core/*.d.ts test/*.spec.js test/*.spec.js.map test/*.spec.d.ts demo-apps/ts-webpack/src/**/*.js demo-apps/ts-webpack/src/**/*.js.map",
     "predoc": "shx rm -rf docs",
     "doc": "typedoc --options typedoc.json index.ts",
+    "predoc-serve": "npm run doc",
+    "doc-serve": "http-server docs -o -c-1",
     "e2e-server": "http-server demo-apps -c-1",
     "e2e-server:ci": "http-server demo-apps -s -c-1 &",
     "e2e": "protractor e2e/protractor.config.js",
@@ -79,7 +83,6 @@
     "test": "karma start --single-run --no-auto-watch",
     "test:debug": "karma start --no-single-run --no-auto-watch",
     "tsc": "tsc",
-    "shrinkwrap:all": "npm shrinkwrap --dev && shx ls -d demo-apps/*/ | bulk -c \"npm shrinkwrap --dev\"",
     "unlink:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm run unlinklocal\"",
     "update-webdriver": "webdriver-manager update",
     "validate-webpack": "webpack-validator webpack.config.js --env.dev --env.test --env.prod",
