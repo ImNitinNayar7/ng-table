@@ -13,7 +13,7 @@
     "preinstall-dep": "npm run unlinklocal",
     "install-dep": "npm install",
     "postinstall-dep": "npm run linklocal",
-    "linklocal": "npm run _linklocal",
+    "linklocal": "npm run _linklocal && npm prune",
     "server": "node ../../node_modules/http-server/bin/http-server -c-1 -o",
     "setup:local": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel build:lib linklocal",
     "start": "npm run server",

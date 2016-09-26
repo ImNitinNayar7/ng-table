@@ -16,7 +16,7 @@
     "preinstall-dep": "npm run unlinklocal",
     "install-dep": "npm install",
     "postinstall-dep": "npm run linklocal",
-    "linklocal": "npm run _linklocal",
+    "linklocal": "npm run _linklocal && npm prune",
     "setup:local": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel build:lib linklocal",
     "server": "node ../../node_modules/http-server/bin/http-server build -c-1 -o",
     "start": "node ../../node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --env.debug",
