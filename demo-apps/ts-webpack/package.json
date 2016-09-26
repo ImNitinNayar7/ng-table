@@ -16,13 +16,13 @@
     "preinstall-dep": "npm run unlinklocal",
     "install-dep": "npm install",
     "postinstall-dep": "npm run linklocal",
-    "linklocal": "npm run _linklocal -- --named ng-table ../../../",
+    "linklocal": "npm run _linklocal",
     "setup:local": "node ../../node_modules/npm-run-all/bin/npm-run-all --parallel build:lib linklocal",
     "server": "node ../../node_modules/http-server/bin/http-server build -c-1 -o",
     "start": "node ../../node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --env.debug",
     "stats": "node ../../node_modules/webpack/bin/webpack.js --env.prod --profile --json > build-stats.json",
     "tsc": "node ../../node_modules/typescript/lib/typescript.js",
-    "unlinklocal": "npm run _linklocal -- unlink --named ng-table ../../../ && npm i",
+    "unlinklocal": "npm run _linklocal -- unlink && npm i",
     "preuninstall-dep": "npm run unlinklocal",
     "uninstall-dep": "npm uninstall",
     "postuninstall-dep": "npm run linklocal",
@@ -32,7 +32,7 @@
   "dependencies": {
     "angular": "1.5.8",
     "bootstrap-css-only": "^3.3.6",
-    "ng-table": "^1.0.0"
+    "ng-table": "file:../.."
   },
   "devDependencies": {}
 }

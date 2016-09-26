@@ -2,6 +2,16 @@
   "name": "ng-table-demo-app-es6-webpack",
   "version": "1.0.0",
   "dependencies": {
+    "@types/angular": {
+      "version": "1.5.16",
+      "from": "@types/angular@>=1.5.13 <2.0.0",
+      "resolved": "https://registry.npmjs.org/@types/angular/-/angular-1.5.16.tgz"
+    },
+    "@types/jquery": {
+      "version": "2.0.32",
+      "from": "@types/jquery@*",
+      "resolved": "https://registry.npmjs.org/@types/jquery/-/jquery-2.0.32.tgz"
+    },
     "acorn": {
       "version": "3.3.0",
       "from": "acorn@>=3.2.0 <4.0.0",
@@ -1227,9 +1237,9 @@
       "dev": true
     },
     "ng-table": {
-      "version": "1.0.0",
-      "from": "ng-table@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ng-table/-/ng-table-1.0.0.tgz"
+      "version": "2.0.0",
+      "from": "..\\..",
+      "resolved": "file:..\\.."
     },
     "node-libs-browser": {
       "version": "1.0.0",

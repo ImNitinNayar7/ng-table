@@ -80,6 +80,7 @@
     "presetup:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm install\"",
     "setup:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm run linklocal\"",
     "setup": "npm-run-all --parallel setup:demo-apps update-webdriver",
+    "shrinkwrap:demo-apps": "shx ls -d demo-apps/*/ | bulk -c \"npm shrinkwrap --dev\"",
     "test": "karma start --single-run --no-auto-watch",
     "test:debug": "karma start --no-single-run --no-auto-watch",
     "tsc": "tsc",
